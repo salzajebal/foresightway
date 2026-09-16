@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "라이프자산운용"
+description = "라이프자산운용의 장기투자 철학과 참여형 투자 전략을 소개하는 기업 홈페이지입니다. 전략, 팀, 뉴스, 문의 정보를 한 흐름으로 제공합니다."
+version = "1.0.0"
+id = "artifacts/life-asset-management"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19746
+
+[services.development]
+run = "pnpm --filter @workspace/life-asset-management run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/life-asset-management", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/life-asset-management/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19746"
+BASE_PATH = "/"

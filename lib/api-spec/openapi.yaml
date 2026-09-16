@@ -1,0 +1,491 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: inquiries
+    description: Consultation inquiry operations
+  - name: admin
+    description: Administrator operations
+  - name: performance
+    description: AI trading performance operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /inquiries:
+    post:
+      operationId: createInquiry
+      tags: [inquiries]
+      summary: Submit a consultation inquiry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InquiryInput"
+      responses:
+        "201":
+          description: Inquiry submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Inquiry"
+        "400":
+          description: Invalid input
+  /admin/login:
+    post:
+      operationId: adminLogin
+      tags: [admin]
+      summary: Sign in to the administrator dashboard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminLoginInput"
+      responses:
+        "200":
+          description: Signed in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminSession"
+        "401":
+          description: Invalid password
+  /admin/logout:
+    post:
+      operationId: adminLogout
+      tags: [admin]
+      summary: Sign out from the administrator dashboard
+      responses:
+        "200":
+          description: Signed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminSession"
+  /admin/session:
+    get:
+      operationId: getAdminSession
+      tags: [admin]
+      summary: Check administrator session
+      responses:
+        "200":
+          description: Current authentication state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminSession"
+  /admin/inquiries:
+    get:
+      operationId: listAdminInquiries
+      tags: [admin]
+      summary: List consultation inquiries
+      responses:
+        "200":
+          description: Inquiry list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Inquiry"
+        "401":
+          description: Administrator authentication required
+  /performance-ai:
+    get:
+      operationId: getPerformanceAi
+      tags: [performance]
+      summary: Get AI trading performance
+      responses:
+        "200":
+          description: AI trading performance dataset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerformanceAi"
+  /admin/performance-ai:
+    put:
+      operationId: updateAdminPerformanceAi
+      tags: [admin]
+      summary: Update AI trading performance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerformanceAiInput"
+      responses:
+        "200":
+          description: Updated AI trading performance dataset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerformanceAi"
+        "400":
+          description: Invalid performance data
+        "401":
+          description: Administrator authentication required
+  /performance-ipo:
+    get:
+      operationId: getPerformanceIpo
+      tags: [performance]
+      summary: Get IPO investment performance
+      responses:
+        "200":
+          description: IPO investment performance dataset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerformanceIpo"
+  /admin/performance-ipo:
+    put:
+      operationId: updateAdminPerformanceIpo
+      tags: [admin]
+      summary: Update IPO investment performance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerformanceIpoInput"
+      responses:
+        "200":
+          description: Updated IPO investment performance dataset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerformanceIpo"
+        "400":
+          description: Invalid performance data
+        "401":
+          description: Administrator authentication required
+  /performance-bonds:
+    get:
+      operationId: getPerformanceBonds
+      tags: [performance]
+      summary: Get bond holdings
+      responses:
+        "200":
+          description: Bond holdings dataset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerformanceBonds"
+  /admin/performance-bonds:
+    put:
+      operationId: updateAdminPerformanceBonds
+      tags: [admin]
+      summary: Update bond holdings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerformanceBondsInput"
+      responses:
+        "200":
+          description: Updated bond holdings dataset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerformanceBonds"
+        "400":
+          description: Invalid bond holdings data
+        "401":
+          description: Administrator authentication required
+  /performance-mezzanine:
+    get:
+      operationId: getPerformanceMezzanine
+      tags: [performance]
+      summary: Get mezzanine investment performance
+      responses:
+        "200":
+          description: Mezzanine investment performance dataset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerformanceMezzanine"
+  /admin/performance-mezzanine:
+    put:
+      operationId: updateAdminPerformanceMezzanine
+      tags: [admin]
+      summary: Update mezzanine investment performance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerformanceMezzanineInput"
+      responses:
+        "200":
+          description: Updated mezzanine investment performance dataset
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerformanceMezzanine"
+        "400":
+          description: Invalid mezzanine investment performance data
+        "401":
+          description: Administrator authentication required
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    InquiryInput:
+      type: object
+      required: [name, phone, email, inquiryType, message]
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 50
+        phone:
+          type: string
+          minLength: 8
+          maxLength: 30
+        email:
+          type: string
+          format: email
+          maxLength: 120
+        inquiryType:
+          type: string
+          enum: [AI 트레이딩, IPO, 채권, 메자닌, 기타]
+        message:
+          type: string
+          minLength: 10
+          maxLength: 2000
+    Inquiry:
+      allOf:
+        - $ref: "#/components/schemas/InquiryInput"
+        - type: object
+          required: [id, createdAt]
+          properties:
+            id:
+              type: integer
+            createdAt:
+              type: string
+              format: date-time
+    AdminLoginInput:
+      type: object
+      required: [password]
+      properties:
+        password:
+          type: string
+          minLength: 1
+    AdminSession:
+      type: object
+      required: [authenticated]
+      properties:
+        authenticated:
+          type: boolean
+    PerformanceAiMonth:
+      type: object
+      required: [month, return]
+      properties:
+        month:
+          type: string
+          minLength: 1
+          maxLength: 30
+        return:
+          type: number
+          minimum: -1000
+          maximum: 1000
+    PerformanceAiTrade:
+      type: object
+      required: [stockName, tradeDetail, return]
+      properties:
+        stockName:
+          type: string
+          minLength: 1
+          maxLength: 100
+        tradeDetail:
+          type: string
+          minLength: 1
+          maxLength: 200
+        return:
+          type: number
+          minimum: -1000
+          maximum: 1000
+    PerformanceAiInput:
+      type: object
+      required: [months, recentTrades, annualAverageReturn, annualAverageStockCount, annualWinRate]
+      properties:
+        months:
+          type: array
+          minItems: 12
+          maxItems: 12
+          items:
+            $ref: "#/components/schemas/PerformanceAiMonth"
+        recentTrades:
+          type: array
+          minItems: 5
+          maxItems: 5
+          items:
+            $ref: "#/components/schemas/PerformanceAiTrade"
+        annualAverageReturn:
+          type: number
+          minimum: -1000
+          maximum: 1000
+        annualAverageStockCount:
+          type: integer
+          minimum: 1
+          maximum: 100000
+        annualWinRate:
+          type: number
+          minimum: 0
+          maximum: 100
+    PerformanceAi:
+      allOf:
+        - $ref: "#/components/schemas/PerformanceAiInput"
+        - type: object
+          required: [updatedAt]
+          properties:
+            updatedAt:
+              type: string
+              format: date-time
+    PerformanceIpoInvestment:
+      type: object
+      required: [stockName, purchasePrice, purchasePeriod, listingDate, return]
+      properties:
+        stockName:
+          type: string
+          minLength: 1
+          maxLength: 100
+        purchasePrice:
+          type: string
+          minLength: 1
+          maxLength: 50
+        purchasePeriod:
+          type: string
+          minLength: 1
+          maxLength: 50
+        listingDate:
+          type: string
+          minLength: 1
+          maxLength: 50
+        return:
+          type: number
+          minimum: -1000
+          maximum: 10000
+    PerformanceIpoInput:
+      type: object
+      required: [investments]
+      properties:
+        investments:
+          type: array
+          minItems: 13
+          maxItems: 13
+          items:
+            $ref: "#/components/schemas/PerformanceIpoInvestment"
+    PerformanceIpo:
+      allOf:
+        - $ref: "#/components/schemas/PerformanceIpoInput"
+        - type: object
+          required: [updatedAt]
+          properties:
+            updatedAt:
+              type: string
+              format: date-time
+    PerformanceBondHolding:
+      type: object
+      required: [bondName, duration, weight]
+      properties:
+        bondName:
+          type: string
+          minLength: 1
+          maxLength: 200
+        duration:
+          type: number
+          minimum: 0
+          maximum: 100000
+        weight:
+          type: number
+          minimum: 0
+          maximum: 100000
+    PerformanceBondsInput:
+      type: object
+      required: [holdings]
+      properties:
+        holdings:
+          type: array
+          minItems: 10
+          maxItems: 10
+          items:
+            $ref: "#/components/schemas/PerformanceBondHolding"
+    PerformanceBonds:
+      allOf:
+        - $ref: "#/components/schemas/PerformanceBondsInput"
+        - type: object
+          required: [updatedAt]
+          properties:
+            updatedAt:
+              type: string
+              format: date-time
+    PerformanceMezzanineHolding:
+      type: object
+      required: [company, type, investmentPeriod, exitPeriod, returnRate]
+      properties:
+        company:
+          type: string
+          minLength: 1
+          maxLength: 100
+        type:
+          type: string
+          minLength: 1
+          maxLength: 50
+        investmentPeriod:
+          type: string
+          minLength: 1
+          maxLength: 50
+        exitPeriod:
+          type: string
+          minLength: 1
+          maxLength: 50
+        returnRate:
+          type: string
+          minLength: 1
+          maxLength: 50
+    PerformanceMezzanineInput:
+      type: object
+      required: [holdings]
+      properties:
+        holdings:
+          type: array
+          minItems: 5
+          maxItems: 5
+          items:
+            $ref: "#/components/schemas/PerformanceMezzanineHolding"
+    PerformanceMezzanine:
+      allOf:
+        - $ref: "#/components/schemas/PerformanceMezzanineInput"
+        - type: object
+          required: [updatedAt]
+          properties:
+            updatedAt:
+              type: string
+              format: date-time
+

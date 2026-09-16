@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="robots" content="noindex, nofollow">
+<title>오늘 일일 방문 한도에 도달했습니다 | Cafe24</title>
+<link rel="shortcut icon" type="image/x-icon" href="//img.cafe24.com/favicon/cafe24.ico">
+<style>
+  /* ===== Cafe24 Brand Design Tokens (wiki: brand-color v1.0) ===== */
+  :root {
+    --brand-blue: #084FFF;
+    --brand-blue-hover: #0740D6;
+    --brand-blue-bg: #EEF3FF;
+    --black: #000000;
+    --black-70: #4C4C4C;
+    --black-50: #808080;
+    --line: #E9ECEF;
+    --line-soft: #F1F3F5;
+    --white: #FFFFFF;
+    --bg: #F7F8FA;
+    --font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+            system-ui, "Apple SD Gothic Neo", "Malgun Gothic", Roboto, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { min-height: 100%; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--black-70);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  /* ===== 안 비교 네비게이션 (배포 시 제거 대상) ===== */
+
+  /* ===== 안 pane ===== */
+
+  .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    min-height: calc(100vh - 52px);
+  }
+  .card {
+    width: 100%;
+    max-width: 560px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 48px 44px 40px;
+    box-shadow: 0 4px 24px rgba(16, 24, 40, 0.04);
+  }
+
+  .visual { display: flex; justify-content: center; margin-bottom: 28px; }
+  .visual svg { width: 168px; height: 168px; }
+
+  .title {
+    font-size: 24px; font-weight: 700; color: var(--black);
+    letter-spacing: -0.02em; text-align: center; line-height: 1.35;
+    margin-bottom: 12px; word-break: keep-all;
+  }
+  .desc {
+    font-size: 15px; color: var(--black-70); text-align: center;
+    margin-bottom: 32px; word-break: keep-all;
+  }
+
+  /* ===== 운영자 안내 영역 ===== */
+  .admin {
+    background: var(--brand-blue-bg); border: 1px solid #DBE5FF;
+    border-radius: 14px; padding: 24px 22px 22px; margin-bottom: 20px;
+    text-align: center;
+  }
+  .admin-label {
+    display: inline-block; font-size: 12px; font-weight: 700; color: var(--brand-blue);
+    background: var(--white); border: 1px solid #DBE5FF; border-radius: 999px;
+    padding: 3px 12px; margin-bottom: 12px;
+  }
+  .admin-desc { font-size: 13.5px; color: var(--black-70); margin-bottom: 18px; word-break: keep-all; }
+  .btns { display: flex; flex-direction: column; gap: 10px; }
+  .btn {
+    position: relative;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 48px; padding: 12px 44px; border-radius: 10px;
+    font-size: 15px; font-weight: 600; font-family: var(--font);
+    cursor: pointer; transition: background .15s, border-color .15s, color .15s;
+    text-align: center; line-height: 1.3;
+  }
+  .btn svg { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; flex-shrink: 0; }
+  .btn-primary { background: var(--brand-blue); color: var(--white); border: 1px solid var(--brand-blue); }
+  .btn-primary:hover { background: var(--brand-blue-hover); border-color: var(--brand-blue-hover); }
+  .btn-secondary { background: var(--white); color: var(--brand-blue); border: 1px solid #BFD0FF; }
+  .btn-secondary:hover { background: var(--brand-blue-bg); border-color: var(--brand-blue); }
+
+  .helplink { text-align: center; margin-top: 18px; }
+  .helplink a {
+    font-size: 13px; color: var(--black-50);
+    border-bottom: 1px solid transparent; transition: color .15s, border-color .15s;
+  }
+  .helplink a:hover { color: var(--brand-blue); border-color: var(--brand-blue); }
+
+  .langs { display: flex; justify-content: center; gap: 4px; margin-top: 28px; flex-wrap: wrap; }
+  .lang-btn {
+    font-size: 12.5px; color: var(--black-50); background: transparent;
+    border: 1px solid transparent; border-radius: 8px; padding: 6px 12px;
+    min-height: 34px; cursor: pointer; font-family: var(--font); transition: all .15s;
+  }
+  .lang-btn:hover { color: var(--black-70); background: var(--line-soft); }
+  .lang-btn.active { color: var(--brand-blue); background: var(--brand-blue-bg); font-weight: 700; }
+
+  .footer { text-align: center; font-size: 12px; color: var(--black-50); padding: 20px; }
+  .footer strong { color: var(--black-70); font-weight: 600; }
+
+  /* i18n: 활성 언어만 노출 (pane 내부 스코프) */
+  [data-i18n] { display: none; }
+  [data-i18n].on { display: block; }
+  .btns [data-i18n].on { display: flex; }
+  .m-br { display: none; }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 24px 16px; }
+    .card { padding: 36px 24px 28px; border-radius: 16px; }
+    .visual svg { width: 140px; height: 140px; }
+    .title { font-size: 21px; }
+    .desc { font-size: 14px; margin-bottom: 26px; }
+    .btn .m-br { display: inline; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+      <div class="card">
+        <div class="visual" aria-hidden="true">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg503a" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#EEF3FF"/><stop offset="100%" stop-color="#DBE5FF"/></linearGradient>
+              <linearGradient id="hd503a" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#2D69FF"/><stop offset="100%" stop-color="#084FFF"/></linearGradient>
+              <linearGradient id="pp503a" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#F9FAFB"/></linearGradient>
+              <linearGradient id="bd503a" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3D77FF"/><stop offset="100%" stop-color="#084FFF"/></linearGradient>
+              <filter id="sh503a" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#084FFF" flood-opacity="0.2"/></filter>
+              <filter id="sh503asm" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/></filter>
+            </defs>
+            <circle cx="100" cy="100" r="92" fill="url(#bg503a)" opacity="0.5"/>
+            <circle cx="100" cy="100" r="78" fill="url(#bg503a)" opacity="0.7"/>
+            <g filter="url(#sh503a)">
+              <rect x="52" y="50" width="96" height="100" rx="12" fill="url(#pp503a)" stroke="#E5E7EB" stroke-width="1"/>
+              <path d="M52 62 Q52 50 64 50 L136 50 Q148 50 148 62 L148 75 L52 75 Z" fill="url(#hd503a)"/>
+              <circle cx="64" cy="62.5" r="2.5" fill="#fff" opacity="0.5"/><circle cx="73" cy="62.5" r="2.5" fill="#fff" opacity="0.5"/>
+              <rect x="60" y="82" width="80" height="18" rx="4" fill="#F3F4F6"/>
+              <rect x="60" y="106" width="80" height="18" rx="4" fill="#F3F4F6"/>
+              <rect x="60" y="130" width="80" height="12" rx="4" fill="#EEF3FF" stroke="#C7D4F0" stroke-width="1"/>
+              <circle cx="70" cy="91" r="3" fill="#22C55E"/><circle cx="80" cy="91" r="3" fill="#22C55E"/><circle cx="90" cy="91" r="3" fill="#084FFF"/>
+              <circle cx="70" cy="115" r="3" fill="#22C55E"/><circle cx="80" cy="115" r="3" fill="#084FFF"/>
+              <circle cx="70" cy="136" r="3" fill="#2D69FF"/><circle cx="80" cy="136" r="3" fill="#BFD0FF"/>
+            </g>
+            <g transform="translate(138, 138)" filter="url(#sh503asm)">
+              <circle r="24" fill="url(#bd503a)"/>
+              <rect x="-8" y="-10" width="5.5" height="20" rx="2" fill="#fff"/>
+              <rect x="2.5" y="-10" width="5.5" height="20" rx="2" fill="#fff"/>
+            </g>
+          </svg>
+        </div>
+
+        <h1 class="title">
+          <span data-i18n="ko" class="on">지금은 사이트에<br>접속할 수 없습니다</span>
+          <span data-i18n="en">This site is<br>currently unavailable</span>
+          <span data-i18n="ja">このウェブページに<br>アクセスできません</span>
+          <span data-i18n="zh">当前无法访问<br>该网站</span>
+        </h1>
+
+        <p class="desc">
+          <span data-i18n="ko" class="on">일시적으로 접속이 제한되었어요.<br>잠시 후 또는 내일 다시 방문하시면 정상적으로 이용하실 수 있습니다.</span>
+          <span data-i18n="en">Access is temporarily restricted.<br>Please try again shortly, or from tomorrow onward, to browse as usual.</span>
+          <span data-i18n="ja">一時的にアクセスが制限されています。<br>しばらく経ってから、または明日以降に再度アクセスいただくと通常どおりご利用いただけます。</span>
+          <span data-i18n="zh">访问已被暂时限制。<br>请稍后重试，或明天再次访问，即可正常浏览。</span>
+        </p>
+
+        <div class="admin">
+          <span class="admin-label">
+            <span data-i18n="ko" class="on" style="display:inline;">운영자분께</span>
+            <span data-i18n="en" style="display:none;">For site owners</span>
+            <span data-i18n="ja" style="display:none;">管理者の方へ</span>
+            <span data-i18n="zh" style="display:none;">致管理员</span>
+          </span>
+          <p class="admin-desc">
+            <span data-i18n="ko" class="on">사이트 트래픽은 자정에 초기화됩니다.<br>지금 바로 복구하려면 아래 옵션을 확인해 보세요.</span>
+            <span data-i18n="en">Site traffic resets at midnight.<br>To restore access now, please check the options below.</span>
+            <span data-i18n="ja">サイトのトラフィックは午前0時にリセットされます。<br>今すぐ復旧するには、以下のオプションをご確認ください。</span>
+            <span data-i18n="zh">网站流量将在午夜重置。<br>如需立即恢复，请查看以下选项。</span>
+          </p>
+          <div class="btns">
+            <a class="btn btn-primary" href="https://hosting.cafe24.com/?controller=myservice_hosting_apply_trafficreset&amp;utm_source=503_page&amp;utm_medium=button&amp;utm_campaign=traffic_recovery&amp;utm_content=primary_cta" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-6.219-8.56"/><polyline points="21 3 21 9 15 9"/></svg>
+              <span data-i18n="ko" class="on">트래픽 초기화하고<br class="m-br"> 즉시 사이트 복구하기</span>
+              <span data-i18n="en">Reset traffic and restore site now</span>
+              <span data-i18n="ja">トラフィックをリセットして今すぐ復旧</span>
+              <span data-i18n="zh">重置流量并立即恢复网站</span>
+            </a>
+            <a class="btn btn-secondary" href="https://hosting.cafe24.com/?controller=myservice_hosting_apply_change&amp;utm_source=503_page&amp;utm_medium=button&amp;utm_campaign=traffic_recovery&amp;utm_content=secondary_cta" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              <span data-i18n="ko" class="on">더 넉넉한 트래픽으로<br class="m-br"> 업그레이드하기</span>
+              <span data-i18n="en">Upgrade to more generous traffic</span>
+              <span data-i18n="ja">より余裕のあるトラフィックにアップグレード</span>
+              <span data-i18n="zh">升级到更充裕的流量</span>
+            </a>
+          </div>
+          <p class="helplink">
+            <a href="https://hosting.cafe24.com/?controller=myservice_hosting_main&amp;utm_source=503_page&amp;utm_medium=link&amp;utm_campaign=traffic_recovery&amp;utm_content=secondary_link" target="_blank" rel="noopener">
+              <span data-i18n="ko" class="on">호스팅 나의 서비스 관리 바로가기 →</span>
+              <span data-i18n="en">Go to My Service Management →</span>
+              <span data-i18n="ja">マイサービス管理へ →</span>
+              <span data-i18n="zh">前往我的服务管理 →</span>
+            </a>
+          </p>
+        </div>
+
+        <div class="langs" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="ko" onclick="setLang(this,'ko')">한국어</button>
+          <button type="button" class="lang-btn" data-lang="en" onclick="setLang(this,'en')">English</button>
+          <button type="button" class="lang-btn" data-lang="ja" onclick="setLang(this,'ja')">日本語</button>
+          <button type="button" class="lang-btn" data-lang="zh" onclick="setLang(this,'zh')">中文</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Copyright &copy; <strong>Cafe24 Corp.</strong> All Rights Reserved.</div>
+<script>
+  (function () {
+    var SUPPORTED = ['ko', 'en', 'ja', 'zh'];
+    var STORAGE_KEY = 'cafe24_block_lang';
+
+    function apply(lang) {
+      if (SUPPORTED.indexOf(lang) === -1) lang = 'ko';
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        var match = el.getAttribute('data-i18n') === lang;
+        if (el.parentElement && el.parentElement.classList.contains('admin-label')) {
+          el.style.display = match ? 'inline' : 'none';
+        } else {
+          el.classList.toggle('on', match);
+        }
+      });
+      document.querySelectorAll('.lang-btn').forEach(function (b) {
+        b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+      });
+      document.documentElement.setAttribute('lang', lang);
+    }
+
+    // 사용자가 스위처로 고른 언어: 적용 + localStorage 기억
+    window.setLang = function (btn, lang) {
+      apply(lang);
+      try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+    };
+
+    // 초기 언어 결정 우선순위: ① 저장된 선택값 > ② 브라우저 언어(languages 배열 순회) > ③ ko
+    function detectLang() {
+      // ① 이전에 사용자가 고른 값
+      try {
+        var saved = localStorage.getItem(STORAGE_KEY);
+        if (saved && SUPPORTED.indexOf(saved) !== -1) return saved;
+      } catch (e) {}
+      // ② 브라우저 선호 언어 목록 순회 (우선순위 순)
+      var langs = (navigator.languages && navigator.languages.length)
+        ? navigator.languages
+        : [navigator.language || navigator.userLanguage || 'ko'];
+      for (var i = 0; i < langs.length; i++) {
+        var code = String(langs[i]).toLowerCase();
+        var base = code.split('-')[0];        // ko-KR → ko
+        if (base === 'ko') return 'ko';
+        if (base === 'en') return 'en';
+        if (base === 'ja') return 'ja';
+        if (base === 'zh') return 'zh';        // zh-CN/zh-TW 모두 zh(간체)로 매핑
+      }
+      // ③ 기본값
+      return 'ko';
+    }
+
+    apply(detectLang());
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+.performance-page {
+  background: #ffffff;
+  color: #171717;
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.performance-intro {
+  padding: 110px 5% 130px;
+  background: #ffffff;
+}
+
+.performance-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.performance-eyebrow {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: #777777;
+  font-family: var(--font-serif);
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.performance-intro h2 {
+  font-size: clamp(34px, 3.5vw, 48px);
+  line-height: 1.4;
+  font-weight: 300;
+  letter-spacing: -1.5px;
+  margin-bottom: 42px;
+  color: #171717;
+}
+
+.performance-intro h2 strong {
+  font-weight: 600;
+  color: #173653;
+}
+
+.performance-intro-copy p {
+  color: #777777;
+  font-size: 16px;
+  line-height: 2;
+  font-weight: 300;
+  margin-top: 16px;
+}
+
+.performance-intro-copy p:first-child {
+  margin-top: 0;
+  font-size: 17px;
+  color: #242424;
+}
+
+.performance-section {
+  padding: 0 5% 130px;
+}
+
+.performance-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 42px;
+  border-bottom: 1px solid #173653;
+  padding-bottom: 24px;
+}
+
+.performance-header > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.performance-header p {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #777777;
+  font-family: var(--font-serif);
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+.performance-header h2 {
+  margin-top: 24px;
+  color: #171717;
+  font-size: clamp(28px, 3vw, 36px);
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -1.5px;
+}
+
+.performance-header-desc {
+  margin-top: 16px;
+  color: #777777;
+  font-size: 15px;
+}
+
+.performance-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 16px;
+  border: 1px solid #e6e6e6;
+  color: #173653;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.performance-status {
+  padding: 40px;
+  border: 1px solid #e6e6e6;
+  text-align: center;
+  color: #777777;
+}
+
+.performance-status-error {
+  color: #c93b3b;
+  background: #fffafa;
+}
+
+.perf-value-positive { color: #173653 !important; font-weight: 600; }
+.perf-value-negative { color: #8a8a8a !important; font-weight: 600; }
+.perf-value-neutral { color: #777777 !important; font-weight: 600; }
+
+.perf-ai-monthly-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+  margin-top: 42px;
+}
+
+.perf-ai-month-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 140px;
+  padding: 24px 20px;
+  border: 1px solid #e6e6e6;
+  background: #ffffff;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.perf-ai-month-card:hover {
+  border-color: #173653;
+  transform: translateY(-5px);
+}
+
+.perf-ai-month-label {
+  color: #777777;
+  font-family: var(--font-serif);
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.perf-ai-month-card strong {
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 600;
+  letter-spacing: -1px;
+  margin: 12px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.perf-ai-month-caption {
+  color: #8a8a8a;
+  font-size: 12px;
+}
+
+.perf-ai-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 42px;
+  border: 1px solid #173653;
+}
+
+.perf-ai-summary div {
+  padding: 32px;
+  border-right: 1px solid #e6e6e6;
+}
+
+.perf-ai-summary div:last-child {
+  border-right: 0;
+}
+
+.perf-ai-summary dt {
+  color: #777777;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.perf-ai-summary dd {
+  color: #171717;
+  font-size: clamp(28px, 2.6vw, 36px);
+  font-weight: 600;
+  letter-spacing: -1px;
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+
+.perf-ai-trades-list {
+  margin-top: 42px;
+}
+
+.perf-ai-trade-row {
+  display: grid;
+  grid-template-columns: 50px 1fr auto;
+  gap: 24px;
+  align-items: center;
+  padding: 24px 18px;
+  border-bottom: 1px solid #e6e6e6;
+  background: #ffffff;
+  transition: background 0.2s ease, padding-left 0.2s ease;
+}
+
+.perf-ai-trade-row:hover {
+  background: #f8f8f6;
+  padding-left: 24px;
+}
+
+.perf-row-number {
+  color: #777777;
+  font-family: var(--font-serif);
+  font-size: 13px;
+}
+
+.perf-ai-trade-info h3 {
+  color: #171717;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin: 0 0 6px 0;
+}
+
+.perf-ai-trade-info p {
+  color: #777777;
+  font-size: 14px;
+  margin: 0;
+}
+
+.perf-ai-trade-return {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  min-width: 90px;
+}
+
+.performance-callout {
+  display: flex;
+  align-items: center;
+  margin-top: 42px;
+  padding: 34px 40px;
+  background: #f8f8f6;
+  border-left: 1px solid #173653;
+}
+
+.performance-callout h3 {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  margin: 0 0 8px 0;
+  color: #171717;
+}
+
+.performance-callout p {
+  color: #777777;
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .perf-ai-monthly-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .perf-ai-summary { grid-template-columns: 1fr; border-right: none; }
+  .perf-ai-summary div { padding: 24px; border-right: 0; border-bottom: 1px solid #e6e6e6; }
+  .perf-ai-summary div:last-child { border-bottom: 0; }
+  .perf-ai-trade-row { grid-template-columns: 40px 1fr auto; gap: 16px; padding: 20px 12px; }
+  .perf-ai-trade-row:hover { padding-left: 16px; }
+  .perf-ai-trade-info h3 { font-size: 16px; }
+  .perf-ai-trade-return { font-size: 20px; min-width: 70px; }
+  .performance-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .performance-callout { padding: 24px; border-left: 0; border-top: 1px solid #173653; }
+}
+
+/* Keep detail-page headings isolated from the homepage performance section. */
+.performance-page .performance-header {
+  text-align: left;
+}
+
+.performance-page .performance-header h2 {
+  font-family: var(--font-sans);
+  font-size: clamp(28px, 3vw, 36px);
+  font-style: normal;
+  line-height: 1.35;
+}
+
+@media (max-width: 768px) {
+  .performance-page .performance-header h2 {
+    font-size: 28px;
+    letter-spacing: -1px;
+  }
+}

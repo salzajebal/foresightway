@@ -1,0 +1,3 @@
+- [Investlife media retrieval](investlife-media-retrieval.md) — Asset GETs require browser-like Referer and Accept headers; generic downloads can return HTML error pages with 200 status.
+- [Admin inquiry access](admin-inquiry-access.md) — 상담 내역은 공개 조회가 아닌 비밀번호 로그인과 서명된 세션 쿠키로 보호한다.
+- [JSONB check constraints](jsonb-check-constraints.md) — PostgreSQL CHECK에서는 JSON 배열을 펼치는 서브쿼리를 쓰지 말고 배열 길이만 보장하며 항목 검증은 API에서 수행한다.
