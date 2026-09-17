@@ -59,15 +59,17 @@ export function Header({ variant = 'overlay' }: HeaderProps) {
           ))}
         </nav>
         
-        <div className="header-right">
-          <div className="lang-switch" data-testid="lang-switch">
-            {homeContent.header.languages.map((lang, index) => (
-              <a key={index} href="#" data-testid={`lang-link-${index}`} style={{ fontWeight: index === 0 ? 700 : 400 }}>
-                {lang}
-              </a>
-            ))}
+        {variant === 'solid' && (
+          <div className="header-right">
+            <div className="lang-switch" data-testid="lang-switch">
+              {homeContent.header.languages.map((lang, index) => (
+                <a key={index} href="#" data-testid={`lang-link-${index}`} style={{ fontWeight: index === 0 ? 700 : 400 }}>
+                  {lang}
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </header>
   );
