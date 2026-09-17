@@ -1557,6 +1557,46 @@ img {
   border-color: #0d8e81;
 }
 
+.admin-ipo-image-field {
+  grid-column: 1 / -1;
+}
+
+.admin-ipo-image-field img,
+.admin-ipo-image-field > span {
+  width: 120px;
+  height: 80px;
+  margin-top: 8px;
+  border: 1px solid #d9dfdf;
+  border-radius: 4px;
+  background: #ffffff;
+  object-fit: contain;
+  padding: 6px;
+}
+
+.admin-ipo-image-field > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7b898e;
+  font-size: 12px;
+  text-align: center;
+}
+
+.admin-ipo-image-field input[type="file"] {
+  margin-top: 10px;
+  padding: 8px;
+}
+
+.admin-ipo-image-field button {
+  width: fit-content;
+  margin-top: 8px;
+  padding: 7px 11px;
+  border: 1px solid #c8d0d0;
+  background: #ffffff;
+  color: #5b686d;
+  cursor: pointer;
+}
+
 .admin-ipo-fields .admin-return-input input {
   padding-right: 30px;
 }

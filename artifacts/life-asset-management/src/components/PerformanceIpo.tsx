@@ -19,6 +19,7 @@ function isPerformanceIpoData(value: unknown): value is PerformanceIpoData {
       && investment.listingDate.trim().length > 0
       && typeof investment.return === 'number'
       && Number.isFinite(investment.return)
+      && (investment.imageUrl === undefined || typeof investment.imageUrl === 'string')
     ))
     && typeof data.updatedAt === 'string';
 }
@@ -203,9 +204,13 @@ export function PerformanceIpo() {
                       {groupedInvestments[year].map((inv, idx) => (
                         <article key={`${inv.stockName}-${idx}`} className="perf-ipo-card">
                           <div className="perf-ipo-card-header">
-                            <span className="perf-ipo-marker" aria-hidden="true">
-                              {inv.stockName.substring(0, 1)}
-                            </span>
+                            {inv.imageUrl ? (
+                              <img className="perf-ipo-company-image" src={inv.imageUrl} alt="" />
+                            ) : (
+                              <span className="perf-ipo-marker" aria-hidden="true">
+                                {inv.stockName.substring(0, 1)}
+                              </span>
+                            )}
                             <h4 className="perf-ipo-name">{inv.stockName}</h4>
                           </div>
                           <dl className="perf-ipo-dl">

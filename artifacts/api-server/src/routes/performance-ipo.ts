@@ -1,4 +1,7 @@
-import { Router, type IRouter } from "express";
+import { randomUUID } from "node:crypto";
+import { mkdir } from "node:fs/promises";
+import path from "node:path";
+import { raw, Router, type IRouter } from "express";
 import { eq } from "drizzle-orm";
 import { db, performanceIpoTable } from "@workspace/db";
 import {
@@ -17,7 +20,16 @@ type IpoInvestment = {
   purchasePeriod: string;
   listingDate: string;
   return: number;
+  imageUrl?: string;
 };
+
+const IMAGE_TYPES = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+} as const;
+const IPO_IMAGE_DIR = process.env["IPO_IMAGE_DIR"]
+  ?? path.resolve(process.cwd(), "data", "ipo-images");
 
 const DEFAULT_INVESTMENTS = [
   { stockName: "퓨런티어", purchasePrice: "7,000원", purchasePeriod: "2021년 11월", listingDate: "2022년 2월 23일", return: 256.8 },
@@ -42,8 +54,49 @@ function hasSensibleValues(data: { investments: IpoInvestment[] }) {
     && item.purchasePeriod.trim().length > 0
     && item.listingDate.trim().length > 0
     && Number.isFinite(item.return)
+    && (item.imageUrl === undefined
+      || /^\/api\/ipo-images\/[a-f0-9-]+\.(jpg|png|webp)$/.test(item.imageUrl))
   ));
 }
+
+router.get("/ipo-images/:filename", async (req, res): Promise<void> => {
+  const filename = req.params["filename"];
+  if (!filename || !/^[a-f0-9-]+\.(jpg|png|webp)$/.test(filename)) {
+    res.status(404).end();
+    return;
+  }
+
+  res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+  res.sendFile(filename, { root: IPO_IMAGE_DIR }, (error) => {
+    if (error && !res.headersSent) res.status(404).end();
+  });
+});
+
+router.post(
+  "/admin/ipo-images",
+  (req, res, next) => {
+    if (!isAdmin(req.headers.cookie)) {
+      res.status(401).json({ error: "관리자 로그인이 필요합니다." });
+      return;
+    }
+    next();
+  },
+  raw({ type: ["image/jpeg", "image/png", "image/webp"], limit: "5mb" }),
+  async (req, res): Promise<void> => {
+    const extension = IMAGE_TYPES[req.headers["content-type"] as keyof typeof IMAGE_TYPES];
+    if (!extension || !Buffer.isBuffer(req.body) || req.body.length === 0) {
+      res.status(400).json({ error: "JPG, PNG 또는 WebP 이미지를 선택해 주세요." });
+      return;
+    }
+
+    await mkdir(IPO_IMAGE_DIR, { recursive: true });
+    const filename = `${randomUUID()}.${extension}`;
+    await import("node:fs/promises").then(({ writeFile }) => (
+      writeFile(path.join(IPO_IMAGE_DIR, filename), req.body)
+    ));
+    res.status(201).json({ imageUrl: `/api/ipo-images/${filename}` });
+  },
+);
 
 async function upsertPerformance(investments: IpoInvestment[], updatedAt = new Date()) {
   const [row] = await db

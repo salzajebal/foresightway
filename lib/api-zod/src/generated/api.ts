@@ -281,6 +281,10 @@ export const getPerformanceIpoResponseOneInvestmentsItemListingDateMax = 50;
 export const getPerformanceIpoResponseOneInvestmentsItemReturnMin = -1000;
 export const getPerformanceIpoResponseOneInvestmentsItemReturnMax = 10000;
 
+export const getPerformanceIpoResponseOneInvestmentsItemImageUrlMax = 500;
+
+
+export const getPerformanceIpoResponseOneInvestmentsItemImageUrlRegExp = new RegExp('^/api/ipo-images/[a-f0-9-]+\\.(jpg|png|webp)$');
 export const getPerformanceIpoResponseOneInvestmentsMin = 13;
 export const getPerformanceIpoResponseOneInvestmentsMax = 13;
 
@@ -292,7 +296,8 @@ export const GetPerformanceIpoResponse = zod.object({
   "purchasePrice": zod.string().min(1).max(getPerformanceIpoResponseOneInvestmentsItemPurchasePriceMax),
   "purchasePeriod": zod.string().min(1).max(getPerformanceIpoResponseOneInvestmentsItemPurchasePeriodMax),
   "listingDate": zod.string().min(1).max(getPerformanceIpoResponseOneInvestmentsItemListingDateMax),
-  "return": zod.number().min(getPerformanceIpoResponseOneInvestmentsItemReturnMin).max(getPerformanceIpoResponseOneInvestmentsItemReturnMax)
+  "return": zod.number().min(getPerformanceIpoResponseOneInvestmentsItemReturnMin).max(getPerformanceIpoResponseOneInvestmentsItemReturnMax),
+  "imageUrl": zod.string().max(getPerformanceIpoResponseOneInvestmentsItemImageUrlMax).regex(getPerformanceIpoResponseOneInvestmentsItemImageUrlRegExp).optional()
 })).min(getPerformanceIpoResponseOneInvestmentsMin).max(getPerformanceIpoResponseOneInvestmentsMax)
 }).and(zod.object({
   "updatedAt": zod.coerce.date()
@@ -313,6 +318,10 @@ export const updateAdminPerformanceIpoBodyInvestmentsItemListingDateMax = 50;
 export const updateAdminPerformanceIpoBodyInvestmentsItemReturnMin = -1000;
 export const updateAdminPerformanceIpoBodyInvestmentsItemReturnMax = 10000;
 
+export const updateAdminPerformanceIpoBodyInvestmentsItemImageUrlMax = 500;
+
+
+export const updateAdminPerformanceIpoBodyInvestmentsItemImageUrlRegExp = new RegExp('^/api/ipo-images/[a-f0-9-]+\\.(jpg|png|webp)$');
 export const updateAdminPerformanceIpoBodyInvestmentsMin = 13;
 export const updateAdminPerformanceIpoBodyInvestmentsMax = 13;
 
@@ -324,7 +333,8 @@ export const UpdateAdminPerformanceIpoBody = zod.object({
   "purchasePrice": zod.string().min(1).max(updateAdminPerformanceIpoBodyInvestmentsItemPurchasePriceMax),
   "purchasePeriod": zod.string().min(1).max(updateAdminPerformanceIpoBodyInvestmentsItemPurchasePeriodMax),
   "listingDate": zod.string().min(1).max(updateAdminPerformanceIpoBodyInvestmentsItemListingDateMax),
-  "return": zod.number().min(updateAdminPerformanceIpoBodyInvestmentsItemReturnMin).max(updateAdminPerformanceIpoBodyInvestmentsItemReturnMax)
+  "return": zod.number().min(updateAdminPerformanceIpoBodyInvestmentsItemReturnMin).max(updateAdminPerformanceIpoBodyInvestmentsItemReturnMax),
+  "imageUrl": zod.string().max(updateAdminPerformanceIpoBodyInvestmentsItemImageUrlMax).regex(updateAdminPerformanceIpoBodyInvestmentsItemImageUrlRegExp).optional()
 })).min(updateAdminPerformanceIpoBodyInvestmentsMin).max(updateAdminPerformanceIpoBodyInvestmentsMax)
 })
 
@@ -339,6 +349,10 @@ export const updateAdminPerformanceIpoResponseOneInvestmentsItemListingDateMax =
 export const updateAdminPerformanceIpoResponseOneInvestmentsItemReturnMin = -1000;
 export const updateAdminPerformanceIpoResponseOneInvestmentsItemReturnMax = 10000;
 
+export const updateAdminPerformanceIpoResponseOneInvestmentsItemImageUrlMax = 500;
+
+
+export const updateAdminPerformanceIpoResponseOneInvestmentsItemImageUrlRegExp = new RegExp('^/api/ipo-images/[a-f0-9-]+\\.(jpg|png|webp)$');
 export const updateAdminPerformanceIpoResponseOneInvestmentsMin = 13;
 export const updateAdminPerformanceIpoResponseOneInvestmentsMax = 13;
 
@@ -350,11 +364,24 @@ export const UpdateAdminPerformanceIpoResponse = zod.object({
   "purchasePrice": zod.string().min(1).max(updateAdminPerformanceIpoResponseOneInvestmentsItemPurchasePriceMax),
   "purchasePeriod": zod.string().min(1).max(updateAdminPerformanceIpoResponseOneInvestmentsItemPurchasePeriodMax),
   "listingDate": zod.string().min(1).max(updateAdminPerformanceIpoResponseOneInvestmentsItemListingDateMax),
-  "return": zod.number().min(updateAdminPerformanceIpoResponseOneInvestmentsItemReturnMin).max(updateAdminPerformanceIpoResponseOneInvestmentsItemReturnMax)
+  "return": zod.number().min(updateAdminPerformanceIpoResponseOneInvestmentsItemReturnMin).max(updateAdminPerformanceIpoResponseOneInvestmentsItemReturnMax),
+  "imageUrl": zod.string().max(updateAdminPerformanceIpoResponseOneInvestmentsItemImageUrlMax).regex(updateAdminPerformanceIpoResponseOneInvestmentsItemImageUrlRegExp).optional()
 })).min(updateAdminPerformanceIpoResponseOneInvestmentsMin).max(updateAdminPerformanceIpoResponseOneInvestmentsMax)
 }).and(zod.object({
   "updatedAt": zod.coerce.date()
 }))
+
+
+/**
+ * @summary Upload an IPO portfolio image
+ */
+export const uploadAdminIpoImageResponseImageUrlMax = 500;
+
+
+
+export const UploadAdminIpoImageResponse = zod.object({
+  "imageUrl": zod.string().max(uploadAdminIpoImageResponseImageUrlMax)
+})
 
 
 /**

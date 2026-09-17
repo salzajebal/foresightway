@@ -32,4 +32,9 @@ export interface PerformanceIpoInvestment {
      * @maximum 10000
      */
   return: number;
+  /**
+     * @maxLength 500
+     * @pattern ^/api/ipo-images/[a-f0-9-]+\.(jpg|png|webp)$
+     */
+  imageUrl?: string;
 }

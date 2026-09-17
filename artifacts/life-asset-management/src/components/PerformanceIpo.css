@@ -252,6 +252,18 @@
   font-family: var(--font-serif);
 }
 
+.perf-ipo-company-image {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  background: #ffffff;
+  object-fit: contain;
+  object-position: center;
+  padding: 4px;
+}
+
 .perf-ipo-name {
   font-size: 18px;
   font-weight: 600;

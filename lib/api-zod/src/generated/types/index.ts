@@ -12,6 +12,7 @@ export * from './healthStatus';
 export * from './inquiry';
 export * from './inquiryInput';
 export * from './inquiryInputInquiryType';
+export * from './ipoImageUploadResponse';
 export * from './performanceAi';
 export * from './performanceAiInput';
 export * from './performanceAiMonth';

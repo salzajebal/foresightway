@@ -25,6 +25,7 @@ import type {
   HealthStatus,
   Inquiry,
   InquiryInput,
+  IpoImageUploadResponse,
   PerformanceAi,
   PerformanceAiInput,
   PerformanceBonds,
@@ -872,6 +873,94 @@ export const useUpdateAdminPerformanceIpo = <TError = ErrorType<void>,
         TContext
       > => {
       return useMutation(getUpdateAdminPerformanceIpoMutationOptions(options));
+    }
+
+export const getUploadAdminIpoImageUrl = () => {
+
+
+
+
+  return `/api/admin/ipo-images`
+}
+
+/**
+ * @summary Upload an IPO portfolio image
+ */
+export const uploadAdminIpoImage = async (uploadAdminIpoImageBody: Blob, options?: Parameters<typeof customFetch>[1]): Promise<IpoImageUploadResponse> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<IpoImageUploadResponse>(getUploadAdminIpoImageUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'image/jpeg', ...getHeaders(options?.headers) },
+    body: uploadAdminIpoImageBody
+  }
+);}
+
+
+
+
+
+export const getUploadAdminIpoImageMutationKey = () => ['uploadAdminIpoImage'] as const;
+
+export const getUploadAdminIpoImageMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof uploadAdminIpoImage>>, TError,UploadAdminIpoImageMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof uploadAdminIpoImage>>, TError,UploadAdminIpoImageMutationVariables, TContext> => {
+
+const mutationKey = getUploadAdminIpoImageMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof uploadAdminIpoImage>>, UploadAdminIpoImageMutationVariables> = (props) => {
+          const {data} = props ?? {};
+
+          return  uploadAdminIpoImage(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UploadAdminIpoImageMutationResult = NonNullable<Awaited<ReturnType<typeof uploadAdminIpoImage>>>
+    export type UploadAdminIpoImageMutationBody = BodyType<Blob>
+    export type UploadAdminIpoImageMutationError = ErrorType<void>
+    export type UploadAdminIpoImageMutationVariables = {data: BodyType<Blob>}
+
+    /**
+ * @summary Upload an IPO portfolio image
+ */
+export const useUploadAdminIpoImage = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof uploadAdminIpoImage>>, TError,UploadAdminIpoImageMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof uploadAdminIpoImage>>,
+        TError,
+        UploadAdminIpoImageMutationVariables,
+        TContext
+      > => {
+      return useMutation(getUploadAdminIpoImageMutationOptions(options));
     }
 
 export const getGetPerformanceBondsUrl = () => {

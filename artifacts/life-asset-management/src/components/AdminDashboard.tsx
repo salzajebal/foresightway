@@ -28,6 +28,7 @@ type IpoForm = {
     purchasePeriod: string;
     listingDate: string;
     returnValue: string;
+    imageUrl: string;
   }[];
 };
 
@@ -71,6 +72,7 @@ function toIpoForm(data: PerformanceIpo): IpoForm {
       purchasePeriod: item.purchasePeriod,
       listingDate: item.listingDate,
       returnValue: String(item.return),
+      imageUrl: item.imageUrl ?? '',
     })),
   };
 }
@@ -381,7 +383,7 @@ export function AdminDashboard() {
     }
   }
 
-  function updateIpo(index: number, field: 'stockName' | 'purchasePrice' | 'purchasePeriod' | 'listingDate' | 'returnValue', value: string) {
+  function updateIpo(index: number, field: 'stockName' | 'purchasePrice' | 'purchasePeriod' | 'listingDate' | 'returnValue' | 'imageUrl', value: string) {
     setIpoForm((current) => {
       if (!current) return current;
       const investments = current.investments.map((item, itemIndex) => (
@@ -389,6 +391,33 @@ export function AdminDashboard() {
       ));
       return { ...current, investments };
     });
+  }
+
+  async function uploadIpoImage(index: number, file: File) {
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      setIpoSaveStatus('JPG, PNG 또는 WebP 이미지를 선택해 주세요.');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setIpoSaveStatus('이미지는 5MB 이하만 업로드할 수 있습니다.');
+      return;
+    }
+
+    setIpoSaveStatus(`투자 ${String(index + 1).padStart(2, '0')} 이미지를 업로드하는 중입니다.`);
+    try {
+      const response = await fetch('/api/admin/ipo-images', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': file.type },
+        body: file,
+      });
+      if (!response.ok) throw new Error('IPO image upload failed');
+      const payload = await response.json() as { imageUrl: string };
+      updateIpo(index, 'imageUrl', payload.imageUrl);
+      setIpoSaveStatus('이미지가 업로드되었습니다. IPO 내역 저장을 눌러 적용해 주세요.');
+    } catch {
+      setIpoSaveStatus('이미지를 업로드하지 못했습니다. 다시 시도해 주세요.');
+    }
   }
 
   async function saveIpo(event: FormEvent<HTMLFormElement>) {
@@ -404,6 +433,7 @@ export function AdminDashboard() {
       purchasePeriod: item.purchasePeriod.trim(),
       listingDate: item.listingDate.trim(),
       return: Number(item.returnValue),
+      ...(item.imageUrl ? { imageUrl: item.imageUrl } : {}),
     }));
     if (investments.some((item) => (
       !item.stockName
@@ -648,6 +678,20 @@ export function AdminDashboard() {
               <label>매수시기<input value={item.purchasePeriod} onChange={(event) => updateIpo(index, 'purchasePeriod', event.target.value)} required /></label>
               <label>상장일<input value={item.listingDate} onChange={(event) => updateIpo(index, 'listingDate', event.target.value)} required /></label>
               <label>투자수익률<div className="admin-return-input"><input type="number" step="0.1" value={item.returnValue} onChange={(event) => updateIpo(index, 'returnValue', event.target.value)} required /><b>%</b></div></label>
+              <label className="admin-ipo-image-field">
+                기업 이미지
+                {item.imageUrl ? <img src={item.imageUrl} alt={`${item.stockName} 미리보기`} /> : <span>등록된 이미지 없음</span>}
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  onChange={(event) => {
+                    const file = event.target.files?.[0];
+                    if (file) void uploadIpoImage(index, file);
+                    event.target.value = '';
+                  }}
+                />
+                {item.imageUrl && <button type="button" onClick={() => updateIpo(index, 'imageUrl', '')}>이미지 삭제</button>}
+              </label>
             </fieldset>)}
           </div>
           <div className="admin-form-actions"><button type="submit">IPO 내역 저장</button>{ipoSaveStatus && <span className="admin-feedback">{ipoSaveStatus}</span>}</div>

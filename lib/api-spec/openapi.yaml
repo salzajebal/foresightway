@@ -178,6 +178,37 @@ paths:
           description: Invalid performance data
         "401":
           description: Administrator authentication required
+  /admin/ipo-images:
+    post:
+      operationId: uploadAdminIpoImage
+      tags: [admin]
+      summary: Upload an IPO portfolio image
+      requestBody:
+        required: true
+        content:
+          image/jpeg:
+            schema:
+              type: string
+              format: binary
+          image/png:
+            schema:
+              type: string
+              format: binary
+          image/webp:
+            schema:
+              type: string
+              format: binary
+      responses:
+        "201":
+          description: Uploaded IPO portfolio image
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IpoImageUploadResponse"
+        "400":
+          description: Invalid image
+        "401":
+          description: Administrator authentication required
   /performance-bonds:
     get:
       operationId: getPerformanceBonds
@@ -391,6 +422,17 @@ components:
           type: number
           minimum: -1000
           maximum: 10000
+        imageUrl:
+          type: string
+          maxLength: 500
+          pattern: "^/api/ipo-images/[a-f0-9-]+\\.(jpg|png|webp)$"
+    IpoImageUploadResponse:
+      type: object
+      required: [imageUrl]
+      properties:
+        imageUrl:
+          type: string
+          maxLength: 500
     PerformanceIpoInput:
       type: object
       required: [investments]

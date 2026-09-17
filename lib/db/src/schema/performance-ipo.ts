@@ -9,6 +9,7 @@ export type PerformanceIpoInvestment = {
   purchasePeriod: string;
   listingDate: string;
   return: number;
+  imageUrl?: string;
 };
 
 export const performanceIpoTable = pgTable("performance_ipo", {
