@@ -167,20 +167,6 @@ img {
   pointer-events: auto;
 }
 
-.header-right {
-  flex: 0 0 180px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 15px;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.lang-switch {
-  display: flex;
-  gap: 10px;
-}
-
 .header--solid {
   position: relative;
   padding: 20px 0;
@@ -3831,10 +3817,6 @@ img {
     width: 132px;
   }
 
-  .header-right {
-    flex-basis: auto;
-  }
-  
   .section {
     padding: 60px 20px;
   }

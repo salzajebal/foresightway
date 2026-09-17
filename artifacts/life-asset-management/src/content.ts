@@ -45,8 +45,7 @@ export const homeContent = {
           { text: "상담문의", href: "#contact-inquiry" }
         ]
       }
-    ],
-    languages: ["KR", "EN"]
+    ]
   },
   hero: {
     phrases: [
