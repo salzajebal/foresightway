@@ -1,0 +1,11 @@
+[Unit]
+Description=Run Foresightway IPO image backup daily
+
+[Timer]
+OnCalendar=*-*-* 18:17:00 UTC
+Persistent=true
+RandomizedDelaySec=5m
+Unit=foresightway-ipo-image-backup.service
+
+[Install]
+WantedBy=timers.target
