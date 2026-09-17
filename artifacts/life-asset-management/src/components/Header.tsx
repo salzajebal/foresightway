@@ -27,7 +27,11 @@ export function Header({ variant = 'overlay' }: HeaderProps) {
         >
           <img
             className="logo-image"
-            src={`${import.meta.env.BASE_URL}images/foresight-logo-final.png`}
+            src={`${import.meta.env.BASE_URL}images/${
+              variant === 'overlay'
+                ? 'foresight-hero-logo.png'
+                : 'foresight-logo-final.png'
+            }`}
             alt="FORESIGHT INVESTMENT 포사이트 투자자문"
             data-testid="img-logo"
           />
