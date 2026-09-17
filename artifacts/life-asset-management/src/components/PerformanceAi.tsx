@@ -173,7 +173,7 @@ export function PerformanceAi() {
       </section>
 
       {!isLoading && !error && performance && (
-        <section className="performance-section reveal-on-scroll" aria-labelledby="pai-trades-heading">
+        <section className="performance-section" aria-labelledby="pai-trades-heading">
           <div className="performance-inner">
             <header className="performance-header">
               <div>
