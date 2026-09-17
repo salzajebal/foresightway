@@ -257,7 +257,7 @@ export const homeContent = {
     ],
     tagline: "데이터와 원칙으로 고객 자산의 방향을 제시합니다.",
     companyName: "주식회사 포사이트투자자문",
-    representative: "김길국",
+    representative: "김관국",
     businessNumber: "660-87-01893",
     address: "서울특별시 영등포구 국제금융로8길 11, 1161호 (여의도동, 대영빌딩)",
     phone: "070-8018-6409",

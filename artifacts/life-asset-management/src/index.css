@@ -2061,7 +2061,7 @@ img {
   display: grid;
   grid-template-columns: 1.05fr 1.3fr 0.9fr;
   gap: 0;
-  margin: 0;
+  margin: 24px 0 0;
   align-self: start;
   border-top: 1px solid #9faeaf;
   border-bottom: 1px solid #cbd3d2;
@@ -3605,6 +3605,7 @@ img {
 
   .footer-details {
     grid-template-columns: 1fr;
+    margin-top: 0;
   }
 
   .footer-details > div {
