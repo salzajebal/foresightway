@@ -190,6 +190,7 @@ img {
 }
 
 .header--solid .logo-image {
+  width: 180px;
   filter: none;
 }
 
@@ -2031,7 +2032,7 @@ img {
 }
 
 .footer-brand img {
-  width: 140px;
+  width: 190px;
   height: auto;
 }
 
@@ -3779,6 +3780,10 @@ img {
   }
 
   .header--overlay .logo-image {
+    width: 132px;
+  }
+
+  .header--solid .logo-image {
     width: 132px;
   }
 

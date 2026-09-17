@@ -30,7 +30,7 @@ export function Header({ variant = 'overlay' }: HeaderProps) {
             src={`${import.meta.env.BASE_URL}images/${
               variant === 'overlay'
                 ? 'foresight-hero-logo.png'
-                : 'foresight-logo-final.png'
+                : 'foresight-brand-logo.png'
             }`}
             alt="FORESIGHT INVESTMENT 포사이트 투자자문"
             data-testid="img-logo"

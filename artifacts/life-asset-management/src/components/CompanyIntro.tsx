@@ -9,7 +9,7 @@ export function CompanyIntro() {
         <div className="company-intro-lead">
           <img
             className="company-intro-logo"
-            src={`${import.meta.env.BASE_URL}images/foresight-logo-final.png`}
+            src={`${import.meta.env.BASE_URL}images/foresight-brand-logo.png`}
             alt="FORESIGHT INVESTMENT 포사이트 투자자문"
           />
         </div>

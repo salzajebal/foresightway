@@ -32,7 +32,7 @@ export function Footer() {
         <div className="footer-main">
           <div className="footer-brand">
             <img
-              src={`${import.meta.env.BASE_URL}images/foresight-logo-footer.png`}
+              src={`${import.meta.env.BASE_URL}images/foresight-brand-logo.png`}
               alt="FORESIGHT INVESTMENT 포사이트 투자자문"
             />
             <p>{footer.tagline}</p>

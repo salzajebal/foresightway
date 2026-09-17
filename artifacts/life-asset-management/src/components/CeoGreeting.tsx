@@ -19,7 +19,7 @@ export function CeoGreeting() {
         <div className="ceo-message-inner">
           <aside className="ceo-brand-panel">
             <img
-              src={`${import.meta.env.BASE_URL}images/foresight-logo-footer.png`}
+              src={`${import.meta.env.BASE_URL}images/foresight-brand-logo.png`}
               alt="FORESIGHT INVESTMENT 포사이트 투자자문"
             />
             <p>데이터와 원칙으로<br />고객 자산의 방향을 제시합니다.</p>
