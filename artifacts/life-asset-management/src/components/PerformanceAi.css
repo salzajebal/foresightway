@@ -128,9 +128,9 @@
   background: #fffafa;
 }
 
-.perf-value-positive { color: #173653 !important; font-weight: 600; }
-.perf-value-negative { color: #8a8a8a !important; font-weight: 600; }
-.perf-value-neutral { color: #777777 !important; font-weight: 600; }
+.performance-ai-page .perf-value-positive { color: #c62828 !important; font-weight: 600; }
+.performance-ai-page .perf-value-negative { color: #1565c0 !important; font-weight: 600; }
+.performance-ai-page .perf-value-neutral { color: #777777 !important; font-weight: 600; }
 
 .perf-ai-monthly-grid {
   display: grid;

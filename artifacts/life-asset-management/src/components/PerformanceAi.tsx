@@ -2,6 +2,12 @@ import { useEffect, useState } from 'react';
 import type { PerformanceAi as PerformanceAiData } from '@workspace/api-client-react';
 import './PerformanceAi.css';
 
+const getReturnClass = (value: number) => {
+  if (value > 0) return 'perf-value-positive';
+  if (value < 0) return 'perf-value-negative';
+  return 'perf-value-neutral';
+};
+
 function isPerformanceAiData(value: unknown): value is PerformanceAiData {
   if (!value || typeof value !== 'object') return false;
   const data = value as Partial<PerformanceAiData>;
@@ -88,7 +94,7 @@ export function PerformanceAi() {
   }, []);
 
   return (
-    <main className="performance-page">
+    <main className="performance-page performance-ai-page">
       <section className="ceo-hero">
         <div className="ceo-hero-inner">
           <p className="ceo-eyebrow">PERFORMANCE</p>
@@ -138,7 +144,7 @@ export function PerformanceAi() {
                     key={item.month}
                   >
                     <span className="perf-ai-month-label">{item.month}</span>
-                    <strong className={item.return >= 0 ? 'perf-value-positive' : 'perf-value-negative'}>
+                    <strong className={getReturnClass(item.return)}>
                       {item.return >= 0 ? '+' : ''}{item.return.toFixed(1)}%
                     </strong>
                     <span className="perf-ai-month-caption">월간 수익률</span>
@@ -148,7 +154,7 @@ export function PerformanceAi() {
               <dl className="perf-ai-summary">
                 <div>
                   <dt>연평균 수익률</dt>
-                  <dd className={performance.annualAverageReturn >= 0 ? 'perf-value-positive' : 'perf-value-negative'}>
+                  <dd className={getReturnClass(performance.annualAverageReturn)}>
                     {performance.annualAverageReturn >= 0 ? '+' : ''}{performance.annualAverageReturn.toFixed(1)}%
                   </dd>
                 </div>
@@ -184,7 +190,7 @@ export function PerformanceAi() {
                     <h3>{trade.stockName}</h3>
                     <p>{trade.tradeDetail}</p>
                   </div>
-                  <strong className={`perf-ai-trade-return ${trade.return >= 0 ? 'perf-value-positive' : 'perf-value-negative'}`}>
+                  <strong className={`perf-ai-trade-return ${getReturnClass(trade.return)}`}>
                     {trade.return >= 0 ? '+' : ''}{trade.return.toFixed(1)}%
                   </strong>
                 </article>
