@@ -44,8 +44,15 @@ export function RiskManagement() {
         <div className="risk-inner">
           <p className="risk-eyebrow">CORE PRINCIPLE</p>
           <h2>
-            지속 가능한 성과는<br />
-            철저한 <strong>위험 관리</strong>에서 시작됩니다.
+            <span className="risk-heading-copy risk-heading-copy--desktop">
+              지속 가능한 성과는<br />
+              철저한 <strong>위험 관리</strong>에서 시작됩니다.
+            </span>
+            <span className="risk-heading-copy risk-heading-copy--mobile">
+              <span>지속 가능한 성과는</span>
+              <span>철저한 <strong>위험 관리</strong>에서</span>
+              <span>시작됩니다.</span>
+            </span>
           </h2>
           <div className="risk-intro-copy">
             <p>
@@ -62,7 +69,15 @@ export function RiskManagement() {
         <div className="risk-inner">
           <header className="risk-header">
             <p>RISK CONTROL SYSTEM</p>
-            <h2>세 단계로 완성하는 <strong>빈틈없는 위험 통제</strong></h2>
+            <h2>
+              <span className="risk-heading-copy risk-heading-copy--desktop">
+                세 단계로 완성하는 <strong>빈틈없는 위험 통제</strong>
+              </span>
+              <span className="risk-heading-copy risk-heading-copy--mobile">
+                <span>세 단계로 완성하는</span>
+                <span><strong>빈틈없는 위험 통제</strong></span>
+              </span>
+            </h2>
           </header>
 
           <div className="risk-grid">
@@ -148,7 +163,15 @@ export function RiskManagement() {
 
           <div className="risk-callout">
             <span className="risk-callout-label">OUR PRINCIPLE</span>
-            <h3>우리는 위험을 피하는 것이 아니라, 이해하고 관리합니다.</h3>
+            <h3>
+              <span className="risk-heading-copy risk-heading-copy--desktop">
+                우리는 위험을 피하는 것이 아니라, 이해하고 관리합니다.
+              </span>
+              <span className="risk-heading-copy risk-heading-copy--mobile">
+                <span>우리는 위험을 피하는 것이 아니라,</span>
+                <span>이해하고 관리합니다.</span>
+              </span>
+            </h3>
             <p>철저한 리스크 관리와 원칙 중심의 운용을 바탕으로 단기적인 시장 변동에 흔들리지 않는 투자 전략을 구축하며, 고객 자산의 안정적인 성장과 장기적인 가치 증대를 함께 만들어가겠습니다.</p>
           </div>
         </div>

@@ -30,7 +30,9 @@ export function CeoGreeting() {
             <p className="ceo-copy-label">CEO MESSAGE</p>
             <h2>
               기업의 성장은<br />
-              <strong>올바른 선택</strong>에서 시작됩니다.
+              <span className="ceo-copy-title-line">
+                <strong>올바른 선택</strong>에서 시작됩니다.
+              </span>
             </h2>
             <p className="ceo-lead">
               올바른 선택은 정확한 데이터와 객관적인 분석, 그리고 미래를 바라보는

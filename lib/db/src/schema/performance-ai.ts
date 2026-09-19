@@ -6,6 +6,7 @@ import { z } from "zod/v4";
 export type PerformanceAiMonth = {
   month: string;
   return: number;
+  cumulativeReturn?: number;
 };
 
 export type PerformanceAiTrade = {

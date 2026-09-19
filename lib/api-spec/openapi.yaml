@@ -345,6 +345,10 @@ components:
           type: number
           minimum: -1000
           maximum: 1000
+        cumulativeReturn:
+          type: number
+          minimum: -100000
+          maximum: 100000
     PerformanceAiTrade:
       type: object
       required: [stockName, tradeDetail, return]

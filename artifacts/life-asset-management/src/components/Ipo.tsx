@@ -164,9 +164,16 @@ export function Ipo() {
         <div className="ipo-intro-inner">
           <p className="ipo-eyebrow">IPO &amp; PRIVATE FUND</p>
           <h2>
-            조합투자는 끝이 아닌,<br />
-            기업의 가치를 시장으로 확장하고<br />
-            확실한 결실을 맺는 <strong>시작</strong>입니다.
+            <span className="ipo-heading-copy ipo-heading-copy--desktop">
+              조합투자는 끝이 아닌,<br />
+              기업의 가치를 시장으로 확장하고<br />
+              확실한 결실을 맺는 <strong>시작</strong>입니다.
+            </span>
+            <span className="ipo-heading-copy ipo-heading-copy--mobile">
+              <span>조합투자는 끝이 아닌,</span>
+              <span>기업의 가치를 시장으로 확장하고</span>
+              <span>확실한 결실을 맺는 <strong>시작</strong>입니다.</span>
+            </span>
           </h2>
 
           <div className="ipo-intro-copy">
@@ -200,7 +207,15 @@ export function Ipo() {
         <div className="ipo-intro-inner">
           <header className="ipo-track-header">
             <p>TRACK RECORD</p>
-            <h2>조합 결성부터 성공적인 엑시트까지,<br />함께 만들어온 성장의 기록입니다.</h2>
+            <h2>
+              <span className="ipo-heading-copy ipo-heading-copy--desktop">
+                조합 결성부터 성공적인 엑시트까지,<br />함께 만들어온 성장의 기록입니다.
+              </span>
+              <span className="ipo-heading-copy ipo-heading-copy--mobile">
+                <span>조합 결성부터 성공적인 엑시트까지,</span>
+                <span>함께 만들어온 성장의 기록입니다.</span>
+              </span>
+            </h2>
           </header>
 
           <div className="ipo-track-grid">
@@ -226,7 +241,15 @@ export function Ipo() {
         <div className="ipo-intro-inner">
           <header className="ipo-structure-header">
             <p>IPO INVESTMENT STRUCTURE</p>
-            <h2>VC에서 최종 고객까지,<br />IPO 주식 유통과 투자조합 구조</h2>
+            <h2>
+              <span className="ipo-heading-copy ipo-heading-copy--desktop">
+                VC에서 최종 고객까지,<br />IPO 주식 유통과 투자조합 구조
+              </span>
+              <span className="ipo-heading-copy ipo-heading-copy--mobile">
+                <span>VC에서 최종 고객까지,</span>
+                <span>IPO 주식 유통과 투자조합 구조</span>
+              </span>
+            </h2>
             <span>VC 지분 확보부터 투자조합을 통한 고객 공급까지 전 과정을 체계적으로 연결합니다.</span>
           </header>
 

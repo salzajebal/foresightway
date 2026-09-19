@@ -14,7 +14,7 @@ type Inquiry = {
 };
 
 type PerformanceForm = {
-  months: { month: string; returnValue: string }[];
+  months: { month: string; returnValue: string; cumulativeReturnValue: string }[];
   recentTrades: { stockName: string; tradeDetail: string; returnValue: string }[];
   annualAverageReturn: string;
   annualAverageStockCount: string;
@@ -52,7 +52,11 @@ type MezzanineForm = {
 
 function toPerformanceForm(data: PerformanceAi): PerformanceForm {
   return {
-    months: data.months.map((item) => ({ month: item.month, returnValue: String(item.return) })),
+    months: data.months.map((item) => ({
+      month: item.month,
+      returnValue: String(item.return),
+      cumulativeReturnValue: item.cumulativeReturn === undefined ? '' : String(item.cumulativeReturn),
+    })),
     recentTrades: data.recentTrades.map((item) => ({
       stockName: item.stockName,
       tradeDetail: item.tradeDetail,
@@ -307,7 +311,7 @@ export function AdminDashboard() {
     void loadMezzanine();
   }
 
-  function updateMonth(index: number, field: 'month' | 'returnValue', value: string) {
+  function updateMonth(index: number, field: 'month' | 'returnValue' | 'cumulativeReturnValue', value: string) {
     setPerformanceForm((current) => {
       if (!current) return current;
       const months = current.months.map((item, itemIndex) => (
@@ -337,6 +341,9 @@ export function AdminDashboard() {
     const months = performanceForm.months.map((item) => ({
       month: item.month.trim(),
       return: Number(item.returnValue),
+      ...(item.cumulativeReturnValue.trim() !== ''
+        ? { cumulativeReturn: Number(item.cumulativeReturnValue) }
+        : {}),
     }));
     const recentTrades = performanceForm.recentTrades.map((item) => ({
       stockName: item.stockName.trim(),
@@ -351,7 +358,11 @@ export function AdminDashboard() {
       annualWinRate: Number(performanceForm.annualWinRate),
     };
     if (
-      months.some((item) => !item.month || !Number.isFinite(item.return))
+      months.some((item) => (
+        !item.month
+        || !Number.isFinite(item.return)
+        || (item.cumulativeReturn !== undefined && !Number.isFinite(item.cumulativeReturn))
+      ))
       || recentTrades.some((item) => (
         !item.stockName
         || !item.tradeDetail
@@ -638,7 +649,8 @@ export function AdminDashboard() {
             {performanceForm.months.map((item, index) => <label key={index}>
               <span>월 {index + 1}</span>
               <input value={item.month} onChange={(event) => updateMonth(index, 'month', event.target.value)} aria-label={`${index + 1}번째 월 라벨`} required />
-              <div className="admin-return-input"><input type="number" step="0.1" value={item.returnValue} onChange={(event) => updateMonth(index, 'returnValue', event.target.value)} aria-label={`${index + 1}번째 수익률`} required /><b>%</b></div>
+              <div className="admin-return-input"><input type="number" step="0.1" value={item.returnValue} onChange={(event) => updateMonth(index, 'returnValue', event.target.value)} aria-label={`${index + 1}번째 월간 수익률`} placeholder="월간 수익률" required /><b>%</b></div>
+              <div className="admin-return-input"><input type="number" step="0.1" value={item.cumulativeReturnValue} onChange={(event) => updateMonth(index, 'cumulativeReturnValue', event.target.value)} aria-label={`${index + 1}번째 누적 수익률`} placeholder="누적 수익률 (선택)" /><b>%</b></div>
             </label>)}
           </div>
           <fieldset className="admin-trades-fields">
@@ -654,7 +666,7 @@ export function AdminDashboard() {
             </div>
           </fieldset>
           <div className="admin-summary-fields">
-            <label>연평균 수익률<input type="number" step="0.1" value={performanceForm.annualAverageReturn} onChange={(event) => setPerformanceForm({ ...performanceForm, annualAverageReturn: event.target.value })} required /><b>%</b></label>
+            <label>연평균 계좌 수익률<input type="number" step="0.1" value={performanceForm.annualAverageReturn} onChange={(event) => setPerformanceForm({ ...performanceForm, annualAverageReturn: event.target.value })} required /><b>%</b></label>
             <label>평균 종목 수<input type="number" step="1" value={performanceForm.annualAverageStockCount} onChange={(event) => setPerformanceForm({ ...performanceForm, annualAverageStockCount: event.target.value })} required /><b>개</b></label>
             <label>연간 승률<input type="number" step="0.1" value={performanceForm.annualWinRate} onChange={(event) => setPerformanceForm({ ...performanceForm, annualWinRate: event.target.value })} required /><b>%</b></label>
           </div>

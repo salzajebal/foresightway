@@ -6,10 +6,12 @@ export function BusinessAreas() {
       <header className="business-areas-header">
         <p className="business-areas-eyebrow">BUSINESS AREA</p>
         <h2>
-          고객에 따라 <strong>다르게</strong> 설계합니다
+          고객에 따라 <strong>다르게</strong>
+          <br className="mobile-text-break" /> 설계합니다
         </h2>
         <p className="business-areas-summary">
-          기업의 성장 단계와 고객의 투자 목적에 맞춘 네 가지 전문 영역.
+          기업의 성장 단계와 고객의 투자 목적에
+          <br className="mobile-text-break" /> 맞춘 네 가지 전문 영역.
         </p>
       </header>
 

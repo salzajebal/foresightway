@@ -54,15 +54,34 @@ export function Hero() {
       
       <div className="hero-content">
         <h1 
-          className={`hero-title fade-${fadeState}`} 
+          className={`hero-title hero-title--phrase-${currentIndex} fade-${fadeState}`}
           data-testid="hero-title"
         >
-          {homeContent.hero.phrases[currentIndex].split('\n').map((line, i) => (
-            <span key={i}>
-              {line}
-              {i < homeContent.hero.phrases[currentIndex].split('\n').length - 1 && <br />}
-            </span>
-          ))}
+          {currentIndex === 1 ? (
+            <>
+              <span className="hero-title-copy hero-title-copy--desktop">
+                {homeContent.hero.phrases[currentIndex].split('\n').map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    {i < homeContent.hero.phrases[currentIndex].split('\n').length - 1 && <br />}
+                  </span>
+                ))}
+              </span>
+              <span className="hero-title-copy hero-title-copy--mobile">
+                <span>변화하는 시장 속에서도</span>
+                <span>흔들리지 않는 포지셔닝으로</span>
+                <span>고객 자산이 나아갈</span>
+                <span>명확한 방향을 제시합니다.</span>
+              </span>
+            </>
+          ) : (
+            homeContent.hero.phrases[currentIndex].split('\n').map((line, i) => (
+              <span key={i}>
+                {line}
+                {i < homeContent.hero.phrases[currentIndex].split('\n').length - 1 && <br />}
+              </span>
+            ))
+          )}
         </h1>
       </div>
     </section>

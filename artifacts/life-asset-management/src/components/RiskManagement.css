@@ -200,7 +200,32 @@
   word-break: keep-all;
 }
 
+.risk-heading-copy--mobile {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .risk-heading-copy--desktop {
+    display: none;
+  }
+
+  .risk-heading-copy--mobile {
+    display: block;
+  }
+
+  .risk-heading-copy--mobile > span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .risk-intro h2 {
+    font-size: clamp(21px, 5.8vw, 24px);
+  }
+
+  .risk-header h2 {
+    font-size: clamp(20px, 5.5vw, 22px);
+  }
+
   .risk-grid {
     gap: 40px;
     padding-top: 40px;
@@ -210,5 +235,9 @@
     padding: 24px;
     border-left: 0;
     border-top: 1px solid #173653;
+  }
+
+  .risk-callout h3 {
+    font-size: clamp(15px, 4.2vw, 17px);
   }
 }

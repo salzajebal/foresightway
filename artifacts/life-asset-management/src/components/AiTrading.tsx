@@ -117,8 +117,16 @@ export function AiTrading() {
         <div className="ai-intro-inner">
           <p className="ai-intro-eyebrow">AI TRADING &amp; SYSTEMATIC</p>
           <h2>
-            감정이 아닌 데이터와 알고리즘 기반의<br />
-            과학적인 <strong>AI 투자전략</strong>으로 자산을 관리합니다.
+            <span className="ai-heading-copy ai-heading-copy--desktop">
+              감정이 아닌 데이터와 알고리즘 기반의<br />
+              과학적인 <strong>AI 투자전략</strong>으로 자산을 관리합니다.
+            </span>
+            <span className="ai-heading-copy ai-heading-copy--mobile">
+              <span>감정이 아닌,</span>
+              <span>데이터와 알고리즘 기반의</span>
+              <span>과학적인 <strong>AI 투자전략</strong>으로</span>
+              <span>자산을 관리합니다.</span>
+            </span>
           </h2>
           <div className="ai-intro-copy">
             <p>
@@ -141,7 +149,15 @@ export function AiTrading() {
         <div className="ai-process-inner">
           <header className="ai-modeling-header">
             <p>AI MODELING</p>
-            <h2>데이터를 수집하고 분석하여<br />최적의 투자 전략을 설계합니다.</h2>
+            <h2>
+              <span className="ai-heading-copy ai-heading-copy--desktop">
+                데이터를 수집하고 분석하여<br />최적의 투자 전략을 설계합니다.
+              </span>
+              <span className="ai-heading-copy ai-heading-copy--mobile">
+                <span>데이터를 수집하고 분석하여</span>
+                <span>최적의 투자 전략을 설계합니다.</span>
+              </span>
+            </h2>
           </header>
 
           <div className="ai-model-grid">
@@ -173,7 +189,16 @@ export function AiTrading() {
         <div className="ai-process-inner">
           <header className="ai-modeling-header">
             <p>AI TRADING</p>
-            <h2>설계된 전략을 자동으로 실행하고<br />지속적으로 모니터링합니다.</h2>
+            <h2>
+              <span className="ai-heading-copy ai-heading-copy--desktop">
+                설계된 전략을 자동으로 실행하고<br />지속적으로 모니터링합니다.
+              </span>
+              <span className="ai-heading-copy ai-heading-copy--mobile">
+                <span>설계된 전략을</span>
+                <span>자동으로 실행하고</span>
+                <span>지속적으로 모니터링합니다.</span>
+              </span>
+            </h2>
           </header>
 
           <div className="ai-model-grid ai-trading-grid">

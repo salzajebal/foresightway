@@ -82,7 +82,10 @@ export function Fa() {
         <div className="fa-track-record-inner">
           <header className="fa-track-record-header reveal-on-scroll">
             <span className="fa-section-eyebrow">TRACK RECORD</span>
-            <h2>고객과 함께 만들어온 자문 성과의 기록입니다.</h2>
+            <h2>
+              <span className="fa-mobile-heading-line">고객과 함께 만들어온</span>{' '}
+              <span className="fa-mobile-heading-line">자문 성과의 기록입니다.</span>
+            </h2>
           </header>
           
           <div className="fa-tr-grid">
@@ -130,7 +133,10 @@ export function Fa() {
         <div className="fa-fee-inner">
           <header className="fa-fee-header reveal-on-scroll">
             <span className="fa-section-eyebrow">ADVISORY FEE</span>
-            <h2>고객의 부담은 없애고 투자 전문성은 극대화한 투명한 자문 구조.</h2>
+            <h2>
+              <span className="fa-mobile-heading-line">고객의 부담은 없애고 투자 전문성은</span>{' '}
+              <span className="fa-mobile-heading-line">극대화한 투명한 자문 구조.</span>
+            </h2>
           </header>
 
           <div className="fa-fee-diagram reveal-on-scroll delay-1">

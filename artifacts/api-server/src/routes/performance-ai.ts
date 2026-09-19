@@ -1,6 +1,11 @@
 import { Router, type IRouter } from "express";
 import { eq } from "drizzle-orm";
-import { db, performanceAiTable } from "@workspace/db";
+import {
+  db,
+  performanceAiTable,
+  type PerformanceAiMonth,
+  type PerformanceAiTrade,
+} from "@workspace/db";
 import {
   GetPerformanceAiResponse,
   UpdateAdminPerformanceAiBody,
@@ -11,9 +16,17 @@ import { isAdmin } from "../lib/admin-auth";
 const router: IRouter = Router();
 const SINGLETON_ID = 1;
 
-const DEFAULT_PERFORMANCE = {
+type PerformanceAiDataset = {
+  months: PerformanceAiMonth[];
+  recentTrades: PerformanceAiTrade[];
+  annualAverageReturn: number;
+  annualAverageStockCount: number;
+  annualWinRate: number;
+};
+
+const DEFAULT_PERFORMANCE: PerformanceAiDataset = {
   months: [
-    { month: "25.10", return: 11.8 },
+    { month: "25.10", return: 11.8, cumulativeReturn: 236 },
     { month: "25.11", return: -6.3 },
     { month: "25.12", return: 1.3 },
     { month: "26.01", return: 29.4 },
@@ -38,16 +51,32 @@ const DEFAULT_PERFORMANCE = {
   annualWinRate: 93,
 };
 
-function responseData(data: typeof DEFAULT_PERFORMANCE, updatedAt: Date) {
+function normalizePerformance(data: PerformanceAiDataset): PerformanceAiDataset {
+  const hasCumulativeReturn = data.months.some((item) => item.cumulativeReturn !== undefined);
+  if (hasCumulativeReturn) return data;
+
   return {
-    ...UpdateAdminPerformanceAiBody.parse(data),
+    ...data,
+    months: data.months.map((item, index) => (
+      index === 0 ? { ...item, cumulativeReturn: 236 } : item
+    )),
+  };
+}
+
+function responseData(data: PerformanceAiDataset, updatedAt: Date) {
+  return {
+    ...UpdateAdminPerformanceAiBody.parse(normalizePerformance(data)),
     updatedAt,
   };
 }
 
-function hasSensibleValues(data: typeof DEFAULT_PERFORMANCE) {
+function hasSensibleValues(data: PerformanceAiDataset) {
   return data.months.length === 12
-    && data.months.every((item) => item.month.trim().length > 0 && Number.isFinite(item.return))
+    && data.months.every((item) => (
+      item.month.trim().length > 0
+      && Number.isFinite(item.return)
+      && (item.cumulativeReturn === undefined || Number.isFinite(item.cumulativeReturn))
+    ))
     && data.recentTrades.length === 5
     && data.recentTrades.every((item) => (
       item.stockName.trim().length > 0
@@ -60,7 +89,7 @@ function hasSensibleValues(data: typeof DEFAULT_PERFORMANCE) {
     && Number.isFinite(data.annualWinRate);
 }
 
-async function upsertPerformance(data: typeof DEFAULT_PERFORMANCE, updatedAt = new Date()) {
+async function upsertPerformance(data: PerformanceAiDataset, updatedAt = new Date()) {
   const [row] = await db
     .insert(performanceAiTable)
     .values({
@@ -96,13 +125,13 @@ router.get("/performance-ai", async (req, res): Promise<void> => {
     return;
   }
 
-  const data = UpdateAdminPerformanceAiBody.parse({
+  const data = normalizePerformance(UpdateAdminPerformanceAiBody.parse({
     months: row.months,
     recentTrades: row.recentTrades,
     annualAverageReturn: row.annualAverageReturn,
     annualAverageStockCount: row.annualAverageStockCount,
     annualWinRate: row.annualWinRate,
-  });
+  }));
   if (!hasSensibleValues(data)) {
     req.log.error("Stored AI performance dataset failed validation");
     res.status(500).json({ error: "저장된 성과 데이터가 올바르지 않습니다." });

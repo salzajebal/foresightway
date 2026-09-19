@@ -49,9 +49,9 @@ export const homeContent = {
   },
   hero: {
     phrases: [
-      "미래를 가늠하는 선견, 투자의 새로운 지평을 엽니다",
+      "미래를 가늠하는 선견,\n투자의 새로운 지평을 엽니다",
       "변화하는 시장 속에서도 흔들리지 않는 포지셔닝으로\n고객 자산이 나아갈 명확한 방향을 제시합니다.",
-      "데이터와 원칙으로 설계하는 “포사이트투자자문”"
+      "데이터와 원칙으로 설계하는\n“포사이트투자자문”"
     ]
   },
   companyIntro: {
@@ -99,7 +99,7 @@ export const homeContent = {
   ],
   investmentPhilosophy: {
     title: "세 가지 투자 원칙.",
-    subtitle: "시장은 예측할 수 없지만, 판단하는 방식은 정할 수 있습니다.",
+    subtitle: "시장은 예측할 수 없지만,\n판단하는 방식은 정할 수 있습니다.",
     principles: [
       {
         title: "정량적 데이터 검증",
@@ -219,7 +219,7 @@ export const homeContent = {
       subtitle: "AI",
       heading: "AI 기반의\n투자 프로세스",
       paragraphs: [
-        "데이터와 알고리즘 기반의 정교한 매매로 상시 계좌의 안정적인 수익을 다집니다."
+        "데이터와 알고리즘 기반의 정교한 매매로\n상시 계좌의 안정적인 수익을 다집니다."
       ]
     },
     {
@@ -227,7 +227,7 @@ export const homeContent = {
       subtitle: "RISK CONTROL",
       heading: "체계적인\n리스크 관리",
       paragraphs: [
-        "단순한 수익 추구보다 자산 보호와 리스크 관리 원칙을 우선합니다."
+        "단순한 수익 추구보다 자산 보호와\n리스크 관리 원칙을 우선합니다."
       ]
     },
     {
@@ -235,7 +235,7 @@ export const homeContent = {
       subtitle: "CUSTOMIZED ADVISORY",
       heading: "빈틈없는\n맞춤형 투자자문",
       paragraphs: [
-        "고객의 성향과 목적에 맞춘 올인원 포지셔닝으로 최적의 자산 관리를 제공합니다."
+        "고객의 성향과 목적에 맞춘 올인원\n포지셔닝으로 최적의 자산 관리를 제공합니다."
       ]
     }
   ],

@@ -17,4 +17,9 @@ export interface PerformanceAiMonth {
      * @maximum 1000
      */
   return: number;
+  /**
+     * @minimum -100000
+     * @maximum 100000
+     */
+  cumulativeReturn?: number;
 }

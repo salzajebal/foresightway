@@ -826,6 +826,16 @@
 }
 
 @media (max-width: 768px) {
+  .fa-mobile-heading-line {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .fa-track-record-header h2,
+  .fa-fee-header h2 {
+    font-size: clamp(16px, 4.4vw, 18px);
+  }
+
   .fa-intro, .fa-targets, .fa-process {
     padding: 80px 5%;
   }

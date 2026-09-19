@@ -134,6 +134,9 @@ export const getPerformanceAiResponseOneMonthsItemMonthMax = 30;
 export const getPerformanceAiResponseOneMonthsItemReturnMin = -1000;
 export const getPerformanceAiResponseOneMonthsItemReturnMax = 1000;
 
+export const getPerformanceAiResponseOneMonthsItemCumulativeReturnMin = -100000;
+export const getPerformanceAiResponseOneMonthsItemCumulativeReturnMax = 100000;
+
 export const getPerformanceAiResponseOneMonthsMin = 12;
 export const getPerformanceAiResponseOneMonthsMax = 12;
 
@@ -160,7 +163,8 @@ export const getPerformanceAiResponseOneAnnualWinRateMax = 100;
 export const GetPerformanceAiResponse = zod.object({
   "months": zod.array(zod.object({
   "month": zod.string().min(1).max(getPerformanceAiResponseOneMonthsItemMonthMax),
-  "return": zod.number().min(getPerformanceAiResponseOneMonthsItemReturnMin).max(getPerformanceAiResponseOneMonthsItemReturnMax)
+  "return": zod.number().min(getPerformanceAiResponseOneMonthsItemReturnMin).max(getPerformanceAiResponseOneMonthsItemReturnMax),
+  "cumulativeReturn": zod.number().min(getPerformanceAiResponseOneMonthsItemCumulativeReturnMin).max(getPerformanceAiResponseOneMonthsItemCumulativeReturnMax).optional()
 })).min(getPerformanceAiResponseOneMonthsMin).max(getPerformanceAiResponseOneMonthsMax),
   "recentTrades": zod.array(zod.object({
   "stockName": zod.string().min(1).max(getPerformanceAiResponseOneRecentTradesItemStockNameMax),
@@ -182,6 +186,9 @@ export const updateAdminPerformanceAiBodyMonthsItemMonthMax = 30;
 
 export const updateAdminPerformanceAiBodyMonthsItemReturnMin = -1000;
 export const updateAdminPerformanceAiBodyMonthsItemReturnMax = 1000;
+
+export const updateAdminPerformanceAiBodyMonthsItemCumulativeReturnMin = -100000;
+export const updateAdminPerformanceAiBodyMonthsItemCumulativeReturnMax = 100000;
 
 export const updateAdminPerformanceAiBodyMonthsMin = 12;
 export const updateAdminPerformanceAiBodyMonthsMax = 12;
@@ -209,7 +216,8 @@ export const updateAdminPerformanceAiBodyAnnualWinRateMax = 100;
 export const UpdateAdminPerformanceAiBody = zod.object({
   "months": zod.array(zod.object({
   "month": zod.string().min(1).max(updateAdminPerformanceAiBodyMonthsItemMonthMax),
-  "return": zod.number().min(updateAdminPerformanceAiBodyMonthsItemReturnMin).max(updateAdminPerformanceAiBodyMonthsItemReturnMax)
+  "return": zod.number().min(updateAdminPerformanceAiBodyMonthsItemReturnMin).max(updateAdminPerformanceAiBodyMonthsItemReturnMax),
+  "cumulativeReturn": zod.number().min(updateAdminPerformanceAiBodyMonthsItemCumulativeReturnMin).max(updateAdminPerformanceAiBodyMonthsItemCumulativeReturnMax).optional()
 })).min(updateAdminPerformanceAiBodyMonthsMin).max(updateAdminPerformanceAiBodyMonthsMax),
   "recentTrades": zod.array(zod.object({
   "stockName": zod.string().min(1).max(updateAdminPerformanceAiBodyRecentTradesItemStockNameMax),
@@ -225,6 +233,9 @@ export const updateAdminPerformanceAiResponseOneMonthsItemMonthMax = 30;
 
 export const updateAdminPerformanceAiResponseOneMonthsItemReturnMin = -1000;
 export const updateAdminPerformanceAiResponseOneMonthsItemReturnMax = 1000;
+
+export const updateAdminPerformanceAiResponseOneMonthsItemCumulativeReturnMin = -100000;
+export const updateAdminPerformanceAiResponseOneMonthsItemCumulativeReturnMax = 100000;
 
 export const updateAdminPerformanceAiResponseOneMonthsMin = 12;
 export const updateAdminPerformanceAiResponseOneMonthsMax = 12;
@@ -252,7 +263,8 @@ export const updateAdminPerformanceAiResponseOneAnnualWinRateMax = 100;
 export const UpdateAdminPerformanceAiResponse = zod.object({
   "months": zod.array(zod.object({
   "month": zod.string().min(1).max(updateAdminPerformanceAiResponseOneMonthsItemMonthMax),
-  "return": zod.number().min(updateAdminPerformanceAiResponseOneMonthsItemReturnMin).max(updateAdminPerformanceAiResponseOneMonthsItemReturnMax)
+  "return": zod.number().min(updateAdminPerformanceAiResponseOneMonthsItemReturnMin).max(updateAdminPerformanceAiResponseOneMonthsItemReturnMax),
+  "cumulativeReturn": zod.number().min(updateAdminPerformanceAiResponseOneMonthsItemCumulativeReturnMin).max(updateAdminPerformanceAiResponseOneMonthsItemCumulativeReturnMax).optional()
 })).min(updateAdminPerformanceAiResponseOneMonthsMin).max(updateAdminPerformanceAiResponseOneMonthsMax),
   "recentTrades": zod.array(zod.object({
   "stockName": zod.string().min(1).max(updateAdminPerformanceAiResponseOneRecentTradesItemStockNameMax),

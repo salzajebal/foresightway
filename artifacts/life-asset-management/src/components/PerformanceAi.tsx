@@ -21,6 +21,10 @@ function isPerformanceAiData(value: unknown): value is PerformanceAiData {
       && Number.isFinite(month.return)
        && month.return >= -1000
        && month.return <= 1000
+       && (month.cumulativeReturn === undefined || (
+         typeof month.cumulativeReturn === 'number'
+         && Number.isFinite(month.cumulativeReturn)
+       ))
     ))
      && Array.isArray(data.recentTrades)
      && data.recentTrades.length === 5
@@ -117,7 +121,8 @@ export function PerformanceAi() {
           </h2>
           <div className="performance-intro-copy">
             <p>
-              알고리즘과 정량 분석 원칙 아래 일궈낸 AI 트레이딩 운용성과 입니다.
+              <span className="performance-mobile-line">알고리즘과 정량 분석 원칙 아래</span>{' '}
+              <span className="performance-mobile-line">일궈낸 AI 트레이딩 운용성과 입니다.</span>
             </p>
           </div>
         </div>
@@ -147,13 +152,18 @@ export function PerformanceAi() {
                     <strong className={getReturnClass(item.return)}>
                       {item.return >= 0 ? '+' : ''}{item.return.toFixed(1)}%
                     </strong>
+                    {item.cumulativeReturn !== undefined && (
+                      <span className={`perf-ai-cumulative-return ${getReturnClass(item.cumulativeReturn)}`}>
+                        (누적수익 {item.cumulativeReturn >= 0 ? '+' : ''}{item.cumulativeReturn.toFixed(0)}%)
+                      </span>
+                    )}
                     <span className="perf-ai-month-caption">월간 수익률</span>
                   </article>
                 ))}
               </div>
               <dl className="perf-ai-summary">
                 <div>
-                  <dt>연평균 수익률</dt>
+                  <dt>연평균 계좌 수익률</dt>
                   <dd className={getReturnClass(performance.annualAverageReturn)}>
                     {performance.annualAverageReturn >= 0 ? '+' : ''}{performance.annualAverageReturn.toFixed(1)}%
                   </dd>

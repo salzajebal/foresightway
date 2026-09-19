@@ -254,6 +254,10 @@ img {
   transform: translateY(-20px);
 }
 
+.hero-title-copy--mobile {
+  display: none;
+}
+
 /* Company intro */
 .company-intro {
   padding: 110px 5% 130px;
@@ -402,6 +406,10 @@ img {
   font-size: 16px;
   line-height: 1.8;
   font-weight: 300;
+}
+
+.mobile-text-break {
+  display: none;
 }
 
 .business-areas-inner {
@@ -2018,15 +2026,15 @@ img {
   gap: 10px;
   border-right: 1px solid #d8d9d7;
   color: #444a48;
-  filter: grayscale(1);
-  opacity: 0.68;
+  filter: grayscale(1) brightness(0.68);
+  opacity: 0.82;
   transition: opacity 0.2s ease, filter 0.2s ease, background-color 0.2s ease;
 }
 
 .partner-item:hover,
 .partner-item:focus-visible {
   background: #ffffff;
-  filter: grayscale(0);
+  filter: grayscale(1) brightness(0.68);
   opacity: 1;
   outline: none;
 }
@@ -2271,6 +2279,10 @@ img {
   height: 10px;
   background: rgba(23, 54, 83, 0.22);
   z-index: -1;
+}
+
+.ceo-copy-title-line {
+  display: inline-block;
 }
 
 .ceo-lead {
@@ -2979,6 +2991,10 @@ img {
   letter-spacing: -1.8px;
 }
 
+.ipo-heading-copy--mobile {
+  display: none;
+}
+
 .ipo-structure-header > span {
   display: block;
   margin-top: 16px;
@@ -3441,6 +3457,10 @@ img {
   letter-spacing: -1.6px;
 }
 
+.ai-heading-copy--mobile {
+  display: none;
+}
+
 .ai-model-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -3798,6 +3818,92 @@ img {
 }
 
 @media (max-width: 768px) {
+  .ipo-heading-copy--desktop {
+    display: none;
+  }
+
+  .ipo-heading-copy--mobile {
+    display: block;
+  }
+
+  .ipo-heading-copy--mobile > span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .ai-heading-copy--desktop {
+    display: none;
+  }
+
+  .ai-heading-copy--mobile {
+    display: block;
+  }
+
+  .ai-heading-copy--mobile > span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .mobile-text-break {
+    display: block;
+  }
+
+  .business-areas-header h2 {
+    font-size: clamp(30px, 8.2vw, 34px);
+  }
+
+  .business-areas-summary {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .investment-philosophy-header p {
+    line-height: 1.7;
+    white-space: pre-line;
+  }
+
+  .ceo-copy h2 {
+    font-size: clamp(24px, 7vw, 28px);
+  }
+
+  .ceo-copy-title-line {
+    white-space: nowrap;
+  }
+
+  .hero-title--phrase-0,
+  .hero-title--phrase-1,
+  .hero-title--phrase-2 {
+    max-width: calc(100vw - 32px);
+    font-size: clamp(19px, 5.6vw, 23px);
+    letter-spacing: -1px;
+    line-height: 1.5;
+  }
+
+  .hero-title--phrase-0 > span,
+  .hero-title--phrase-2 > span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .hero-title--phrase-1 .hero-title-copy--desktop {
+    display: none;
+  }
+
+  .hero-title--phrase-1 .hero-title-copy--mobile {
+    display: block;
+  }
+
+  .hero-title--phrase-1 .hero-title-copy--mobile > span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .investment-feature p {
+    font-size: 14px;
+    line-height: 1.9;
+    white-space: pre-line;
+  }
+
   .nav-desktop {
     display: none;
   }
@@ -4058,7 +4164,7 @@ img {
   }
 
   .ai-intro h2 {
-    font-size: 33px;
+    font-size: clamp(19px, 5.5vw, 22px);
   }
 
   .ai-intro-copy {
@@ -4110,7 +4216,7 @@ img {
   }
 
   .ipo-intro h2 {
-    font-size: 33px;
+    font-size: clamp(18px, 4.9vw, 20px);
   }
 
   .ipo-intro-copy {
@@ -4135,7 +4241,7 @@ img {
   }
 
   .ipo-track-header h2 {
-    font-size: 30px;
+    font-size: clamp(18px, 4.9vw, 20px);
   }
 
   .ipo-track-grid {
@@ -4155,7 +4261,7 @@ img {
   }
 
   .ipo-structure-header h2 {
-    font-size: 31px;
+    font-size: clamp(18px, 4.9vw, 20px);
   }
 
   .ipo-structure-map {
@@ -4219,7 +4325,7 @@ img {
   }
 
   .ai-modeling-header h2 {
-    font-size: 32px;
+    font-size: clamp(19px, 5.5vw, 22px);
   }
 
   .ai-model-grid {
