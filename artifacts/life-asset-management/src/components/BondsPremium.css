@@ -166,8 +166,8 @@
 .bp-intro-text p {
   font-size: 15px;
   line-height: 1.8;
-  color: #555555;
-  font-weight: 300;
+  color: #222222;
+  font-weight: 400;
 }
 
 .bp-intro-visual-wrapper {
@@ -248,8 +248,8 @@
 
 .bp-process-header p {
   font-size: 15px;
-  color: #6B7280;
-  font-weight: 300;
+  color: #222222;
+  font-weight: 400;
 }
 
 .bp-process-wrapper {
@@ -330,7 +330,7 @@
 
 .bp-pt-content li {
   font-size: 14px;
-  color: #555555;
+  color: #222222;
   line-height: 1.6;
   position: relative;
   padding-left: 12px;
@@ -370,8 +370,8 @@
 
 .bp-services-header p {
   font-size: 15px;
-  color: #6B7280;
-  font-weight: 300;
+  color: #222222;
+  font-weight: 400;
 }
 
 .bp-services-list {
@@ -454,8 +454,8 @@
 .bp-sr-description p {
   font-size: 15px;
   line-height: 1.8;
-  color: #555555;
-  font-weight: 300;
+  color: #222222;
+  font-weight: 400;
 }
 
 /* --- Responsive Adjustments --- */

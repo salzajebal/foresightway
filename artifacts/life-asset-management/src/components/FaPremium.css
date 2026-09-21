@@ -97,8 +97,8 @@
 .fa-intro-text p {
   font-size: 16px;
   line-height: 1.8;
-  color: #555555;
-  font-weight: 300;
+  color: #222222;
+  font-weight: 400;
 }
 
 .fa-intro-visual-wrapper {
@@ -364,7 +364,7 @@
 
 .fa-fee-node p {
   font-size: 14px;
-  color: #6B7280;
+  color: #222222;
 }
 
 .fa-fee-link {
@@ -411,7 +411,7 @@
 
 .fa-fee-label-bottom {
   font-size: 13px;
-  color: #6B7280;
+  color: #222222;
   text-align: center;
 }
 
@@ -478,8 +478,8 @@
 
 .fa-partners-header p {
   font-size: 15px;
-  color: #6B7280;
-  font-weight: 300;
+  color: #222222;
+  font-weight: 400;
 }
 
 .fa-partners-grid {
@@ -597,8 +597,8 @@
 .fa-service-desc {
   font-size: 15px;
   line-height: 1.7;
-  color: #555555;
-  font-weight: 300;
+  color: #222222;
+  font-weight: 400;
 }
 
 .fa-service-banner {
