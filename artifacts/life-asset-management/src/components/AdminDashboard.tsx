@@ -692,6 +692,7 @@ export function AdminDashboard() {
               <label>투자수익률<div className="admin-return-input"><input type="number" step="0.1" value={item.returnValue} onChange={(event) => updateIpo(index, 'returnValue', event.target.value)} required /><b>%</b></div></label>
               <label className="admin-ipo-image-field">
                 기업 이미지
+                <small>600×240px 투명 PNG 또는 WebP 권장 (가로 5:2)</small>
                 {item.imageUrl ? <img src={item.imageUrl} alt={`${item.stockName} 미리보기`} /> : <span>등록된 이미지 없음</span>}
                 <input
                   type="file"
