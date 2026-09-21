@@ -9,7 +9,7 @@ export function Footer() {
         <div className="partner-track">
           {[...footer.partners, ...footer.partners].map((partner, index) => (
             <a
-              className="partner-item"
+              className={`partner-item${partner.logo === 'dart.png' ? ' partner-item--dart' : ''}`}
               href={partner.url}
               target="_blank"
               rel="noreferrer"

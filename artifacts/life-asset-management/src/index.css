@@ -2039,6 +2039,16 @@ img {
   outline: none;
 }
 
+.partner-item--dart,
+.partner-item--dart:hover,
+.partner-item--dart:focus-visible {
+  filter: none;
+}
+
+.partner-item--dart img {
+  mix-blend-mode: multiply;
+}
+
 .partner-item img {
   max-width: 84px;
   max-height: 32px;
