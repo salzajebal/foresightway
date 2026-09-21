@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { mkdir, rename, unlink, writeFile } from "node:fs/promises";
+import { mkdir, rename, stat, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { raw, Router, type IRouter } from "express";
 import { eq } from "drizzle-orm";
@@ -88,13 +88,25 @@ function hasSensibleValues(data: { investments: IpoInvestment[] }) {
 router.get("/ipo-images/:filename", async (req, res): Promise<void> => {
   const filename = req.params["filename"];
   if (!filename || !/^[a-f0-9-]+\.(jpg|png|webp)$/.test(filename)) {
+    res.setHeader("Cache-Control", "no-store");
     res.status(404).end();
     return;
   }
 
-  res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
-  res.sendFile(filename, { root: IPO_IMAGE_DIR }, (error) => {
-    if (error && !res.headersSent) res.status(404).end();
+  try {
+    const imagePath = path.join(IPO_IMAGE_DIR, filename);
+    const imageStat = await stat(imagePath);
+    if (!imageStat.isFile()) throw new Error("Not a file");
+  } catch {
+    res.setHeader("Cache-Control", "no-store");
+    res.status(404).end();
+    return;
+  }
+
+  res.sendFile(filename, {
+    root: IPO_IMAGE_DIR,
+    maxAge: "1y",
+    immutable: true,
   });
 });
 

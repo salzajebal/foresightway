@@ -712,7 +712,7 @@ export function AdminDashboard() {
               <label className="admin-ipo-image-field">
                 기업 이미지
                 <small>600×240px 투명 PNG 또는 WebP 권장 (가로 5:2)</small>
-                {item.imageUrl ? <img src={item.imageUrl} alt={`${item.stockName} 미리보기`} /> : <span>등록된 이미지 없음</span>}
+                {item.imageUrl ? <img src={`${item.imageUrl}?v=2`} alt={`${item.stockName} 미리보기`} /> : <span>등록된 이미지 없음</span>}
                 <input
                   type="file"
                   accept="image/jpeg,image/png,image/webp"

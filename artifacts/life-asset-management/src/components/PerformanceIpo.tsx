@@ -24,7 +24,7 @@ function CompanyLogo({ imageUrl, stockName }: { imageUrl?: string; stockName: st
   return (
     <img
       className="perf-ipo-company-image"
-      src={imageUrl}
+      src={`${imageUrl}?v=2`}
       alt={`${stockName} 로고`}
       onError={() => setIsAvailable(false)}
     />
