@@ -344,6 +344,35 @@
   margin: 0;
 }
 
+.performance-ipo-guide-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.performance-ipo-guide-action a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 250px;
+  min-height: 54px;
+  padding: 14px 30px;
+  border: 1px solid #173653;
+  color: #173653;
+  background: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  text-decoration: none;
+  transition: color 180ms ease, background-color 180ms ease;
+}
+
+.performance-ipo-guide-action a:hover,
+.performance-ipo-guide-action a:focus-visible {
+  color: #fff;
+  background: #173653;
+}
+
 .performance-mobile-cards { display: none; }
 
 @media (max-width: 768px) {
@@ -395,6 +424,10 @@
     padding: 24px;
     border-left: 0;
     border-top: 1px solid #173653;
+  }
+
+  .performance-ipo-guide-action a {
+    width: 100%;
   }
   
   .perf-ipo-board { gap: 16px; }

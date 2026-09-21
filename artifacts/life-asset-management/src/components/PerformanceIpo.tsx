@@ -242,6 +242,9 @@ export function PerformanceIpo() {
                   <p>각 기업의 투자 및 상장 전후 사례를 확인하실 수 있습니다.</p>
                 </div>
               </aside>
+              <div className="performance-ipo-guide-action">
+                <a href={`${baseUrl}otc-stock-guide`}>장외주식 확인 방법</a>
+              </div>
             </>
           )}
         </div>

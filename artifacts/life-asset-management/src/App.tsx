@@ -25,6 +25,7 @@ import { PerformanceAi } from './components/PerformanceAi';
 import { PerformanceIpo } from './components/PerformanceIpo';
 import { PerformanceBonds } from './components/PerformanceBonds';
 import { PerformanceMezzanine } from './components/PerformanceMezzanine';
+import { OtcStockGuide } from './components/OtcStockGuide';
 
 export default function App() {
   if (window.location.pathname.endsWith('/admin')) {
@@ -136,6 +137,16 @@ export default function App() {
       <div className="app-wrapper">
         <Header variant="solid" />
         <PerformanceIpo />
+        <Footer />
+      </div>
+    );
+  }
+
+  if (window.location.pathname.endsWith('/otc-stock-guide')) {
+    return (
+      <div className="app-wrapper">
+        <Header variant="solid" />
+        <OtcStockGuide />
         <Footer />
       </div>
     );
