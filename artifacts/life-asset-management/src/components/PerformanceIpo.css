@@ -171,7 +171,7 @@
 }
 
 .perf-text-right { text-align: right !important; }
-.perf-value-positive { color: #173653 !important; font-weight: 600; }
+.performance-ipo-page .perf-value-positive { color: #d71920 !important; font-weight: 600; }
 .perf-value-negative { color: #8a8a8a !important; font-weight: 600; }
 .perf-value-neutral { color: #777777 !important; font-weight: 600; }
 

@@ -91,7 +91,7 @@ export function PerformanceIpo() {
   }, []);
 
   return (
-    <main className="performance-page">
+    <main className="performance-page performance-ipo-page">
       <section className="ceo-hero">
         <div className="ceo-hero-inner">
           <p className="ceo-eyebrow">PERFORMANCE</p>
