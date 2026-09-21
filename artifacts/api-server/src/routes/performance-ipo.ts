@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { mkdir } from "node:fs/promises";
+import { mkdir, rename, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { raw, Router, type IRouter } from "express";
 import { eq } from "drizzle-orm";
@@ -30,6 +30,32 @@ const IMAGE_TYPES = {
 } as const;
 const IPO_IMAGE_DIR = process.env["IPO_IMAGE_DIR"]
   ?? path.resolve(process.cwd(), "data", "ipo-images");
+
+function detectImageExtension(buffer: Buffer): "jpg" | "png" | "webp" | null {
+  const isPng = buffer.length >= 33
+    && buffer.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))
+    && buffer.subarray(12, 16).toString("ascii") === "IHDR"
+    && buffer.readUInt32BE(16) > 0
+    && buffer.readUInt32BE(20) > 0
+    && buffer.subarray(buffer.length - 8).equals(Buffer.from([0x49, 0x45, 0x4e, 0x44, 0xae, 0x42, 0x60, 0x82]));
+  if (isPng) return "png";
+
+  const isJpeg = buffer.length >= 16
+    && buffer[0] === 0xff
+    && buffer[1] === 0xd8
+    && buffer[2] === 0xff
+    && buffer[buffer.length - 2] === 0xff
+    && buffer[buffer.length - 1] === 0xd9;
+  if (isJpeg) return "jpg";
+
+  const webpChunk = buffer.subarray(12, 16).toString("ascii");
+  const isWebp = buffer.length >= 30
+    && buffer.subarray(0, 4).toString("ascii") === "RIFF"
+    && buffer.subarray(8, 12).toString("ascii") === "WEBP"
+    && ["VP8 ", "VP8L", "VP8X"].includes(webpChunk)
+    && buffer.readUInt32LE(4) + 8 === buffer.length;
+  return isWebp ? "webp" : null;
+}
 
 const DEFAULT_INVESTMENTS = [
   { stockName: "퓨런티어", purchasePrice: "7,000원", purchasePeriod: "2021년 11월", listingDate: "2022년 2월 23일", return: 256.8 },
@@ -83,17 +109,27 @@ router.post(
   },
   raw({ type: ["image/jpeg", "image/png", "image/webp"], limit: "5mb" }),
   async (req, res): Promise<void> => {
-    const extension = IMAGE_TYPES[req.headers["content-type"] as keyof typeof IMAGE_TYPES];
-    if (!extension || !Buffer.isBuffer(req.body) || req.body.length === 0) {
+    const declaredExtension = IMAGE_TYPES[req.headers["content-type"] as keyof typeof IMAGE_TYPES];
+    const detectedExtension = Buffer.isBuffer(req.body) ? detectImageExtension(req.body) : null;
+    if (!declaredExtension || !detectedExtension || declaredExtension !== detectedExtension) {
+      req.log.warn("Rejected invalid or mismatched IPO image upload");
       res.status(400).json({ error: "JPG, PNG 또는 WebP 이미지를 선택해 주세요." });
       return;
     }
 
     await mkdir(IPO_IMAGE_DIR, { recursive: true });
-    const filename = `${randomUUID()}.${extension}`;
-    await import("node:fs/promises").then(({ writeFile }) => (
-      writeFile(path.join(IPO_IMAGE_DIR, filename), req.body)
-    ));
+    const filename = `${randomUUID()}.${detectedExtension}`;
+    const finalPath = path.join(IPO_IMAGE_DIR, filename);
+    const temporaryPath = `${finalPath}.uploading`;
+    try {
+      await writeFile(temporaryPath, req.body, { flag: "wx" });
+      await rename(temporaryPath, finalPath);
+    } catch (error) {
+      await unlink(temporaryPath).catch(() => undefined);
+      req.log.error({ error }, "Failed to persist IPO image");
+      res.status(500).json({ error: "이미지를 안전하게 저장하지 못했습니다. 다시 시도해 주세요." });
+      return;
+    }
     res.status(201).json({ imageUrl: `/api/ipo-images/${filename}` });
   },
 );

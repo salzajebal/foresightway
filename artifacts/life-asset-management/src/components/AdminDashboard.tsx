@@ -416,18 +416,37 @@ export function AdminDashboard() {
 
     setIpoSaveStatus(`투자 ${String(index + 1).padStart(2, '0')} 이미지를 업로드하는 중입니다.`);
     try {
+      const bitmap = await createImageBitmap(file);
+      if (bitmap.width < 1 || bitmap.height < 1) {
+        bitmap.close();
+        throw new Error('Invalid image dimensions');
+      }
+      bitmap.close();
+
       const response = await fetch('/api/admin/ipo-images', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': file.type },
         body: file,
       });
-      if (!response.ok) throw new Error('IPO image upload failed');
-      const payload = await response.json() as { imageUrl: string };
+      const payload = await response.json() as { imageUrl?: unknown; error?: unknown };
+      if (!response.ok) {
+        throw new Error(typeof payload.error === 'string' ? payload.error : 'IPO image upload failed');
+      }
+      if (
+        typeof payload.imageUrl !== 'string'
+        || !/^\/api\/ipo-images\/[a-f0-9-]+\.(jpg|png|webp)$/.test(payload.imageUrl)
+      ) {
+        throw new Error('Invalid IPO image response');
+      }
       updateIpo(index, 'imageUrl', payload.imageUrl);
       setIpoSaveStatus('이미지가 업로드되었습니다. IPO 내역 저장을 눌러 적용해 주세요.');
-    } catch {
-      setIpoSaveStatus('이미지를 업로드하지 못했습니다. 다시 시도해 주세요.');
+    } catch (error) {
+      setIpoSaveStatus(
+        error instanceof Error && error.message.includes('안전하게 저장')
+          ? error.message
+          : '이미지 파일이 손상되었거나 올바른 형식이 아닙니다. 다른 파일로 다시 시도해 주세요.',
+      );
     }
   }
 

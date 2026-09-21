@@ -2,6 +2,35 @@ import { useEffect, useState, useMemo } from 'react';
 import type { PerformanceIpo as PerformanceIpoData } from '@workspace/api-client-react';
 import './PerformanceIpo.css';
 
+const IPO_IMAGE_URL_PATTERN = /^\/api\/ipo-images\/[a-f0-9-]+\.(jpg|png|webp)$/;
+
+function CompanyLogo({ imageUrl, stockName }: { imageUrl?: string; stockName: string }) {
+  const [isAvailable, setIsAvailable] = useState(
+    typeof imageUrl === 'string' && IPO_IMAGE_URL_PATTERN.test(imageUrl),
+  );
+
+  useEffect(() => {
+    setIsAvailable(typeof imageUrl === 'string' && IPO_IMAGE_URL_PATTERN.test(imageUrl));
+  }, [imageUrl]);
+
+  if (!isAvailable || !imageUrl) {
+    return (
+      <span className="perf-ipo-marker" aria-hidden="true">
+        {stockName.substring(0, 1)}
+      </span>
+    );
+  }
+
+  return (
+    <img
+      className="perf-ipo-company-image"
+      src={imageUrl}
+      alt={`${stockName} 로고`}
+      onError={() => setIsAvailable(false)}
+    />
+  );
+}
+
 function isPerformanceIpoData(value: unknown): value is PerformanceIpoData {
   if (!value || typeof value !== 'object') return false;
   const data = value as Partial<PerformanceIpoData>;
@@ -19,7 +48,10 @@ function isPerformanceIpoData(value: unknown): value is PerformanceIpoData {
       && investment.listingDate.trim().length > 0
       && typeof investment.return === 'number'
       && Number.isFinite(investment.return)
-      && (investment.imageUrl === undefined || typeof investment.imageUrl === 'string')
+      && (
+        investment.imageUrl === undefined
+        || (typeof investment.imageUrl === 'string' && IPO_IMAGE_URL_PATTERN.test(investment.imageUrl))
+      )
     ))
     && typeof data.updatedAt === 'string';
 }
@@ -204,13 +236,7 @@ export function PerformanceIpo() {
                       {groupedInvestments[year].map((inv, idx) => (
                         <article key={`${inv.stockName}-${idx}`} className="perf-ipo-card">
                           <div className="perf-ipo-card-header">
-                            {inv.imageUrl ? (
-                              <img className="perf-ipo-company-image" src={inv.imageUrl} alt="" />
-                            ) : (
-                              <span className="perf-ipo-marker" aria-hidden="true">
-                                {inv.stockName.substring(0, 1)}
-                              </span>
-                            )}
+                            <CompanyLogo imageUrl={inv.imageUrl} stockName={inv.stockName} />
                             <h4 className="perf-ipo-name">{inv.stockName}</h4>
                           </div>
                           <dl className="perf-ipo-dl">
