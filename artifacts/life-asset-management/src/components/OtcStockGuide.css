@@ -1,22 +1,40 @@
 .otc-guide-page {
   min-height: 100vh;
   padding-top: 88px;
-  background: #fff;
+  background: #f6f7f6;
   color: #171717;
 }
 
 .otc-guide-hero {
-  padding: 78px 24px 100px;
+  padding: 0 24px 110px;
 }
 
 .otc-guide-inner {
-  width: min(1180px, 100%);
+  width: min(1200px, 100%);
   margin: 0 auto;
 }
 
 .otc-guide-header {
+  position: relative;
+  width: calc(100% + 48px);
+  margin-left: -24px;
+  padding: 92px 24px 88px;
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 58px;
+  overflow: hidden;
+  background: #173653;
+  color: #ffffff;
+}
+
+.otc-guide-header::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(1200px, calc(100% - 48px));
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateX(-50%);
 }
 
 .otc-guide-header > p {
@@ -25,7 +43,7 @@
   justify-content: center;
   gap: 12px;
   margin: 0 0 20px;
-  color: #9a7b42;
+  color: #d6bd8a;
   font-family: var(--font-serif);
   font-size: 11px;
   letter-spacing: 4px;
@@ -34,14 +52,14 @@
 .otc-guide-header > p span {
   width: 34px;
   height: 1px;
-  background: #b89a61;
+  background: #d6bd8a;
 }
 
 .otc-guide-header h1 {
   margin: 0;
   font-family: var(--font-serif);
   font-size: clamp(34px, 4vw, 48px);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -1.5px;
   line-height: 1.25;
 }
@@ -49,34 +67,69 @@
 .otc-guide-header > span {
   display: block;
   margin-top: 16px;
-  color: #7a7a7a;
-  font-size: 14px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 15px;
+  line-height: 1.7;
 }
 
 .otc-guide-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  gap: 20px;
 }
 
 .otc-guide-card {
+  position: relative;
   display: flex;
   align-items: center;
-  min-height: 134px;
-  padding: 25px 22px;
-  border: 1px solid #dedede;
-  border-radius: 12px;
+  min-height: 154px;
+  padding: 30px 26px;
+  border: 1px solid #dde1df;
+  border-top: 3px solid #173653;
+  border-radius: 4px;
   background: #fff;
-  box-shadow: 0 4px 18px rgb(23 54 83 / 4%);
+  box-shadow: 0 10px 30px rgb(23 54 83 / 5%);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.otc-guide-card:hover {
+  border-color: #b9c2c8;
+  border-top-color: #b89a61;
+  box-shadow: 0 16px 36px rgb(23 54 83 / 10%);
+  transform: translateY(-4px);
+}
+
+.otc-guide-card-number {
+  position: absolute;
+  top: 15px;
+  right: 17px;
+  color: #9aa3a8;
+  font-family: var(--font-serif);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.otc-guide-logo-frame {
+  flex: 0 0 72px;
+  width: 72px;
+  height: 72px;
+  margin-right: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2e5e3;
+  border-radius: 3px;
+  background: #f8f9f8;
+  overflow: hidden;
 }
 
 .otc-guide-logo {
   flex: 0 0 48px;
   width: 48px;
   height: 54px;
-  margin-right: 20px;
   background-repeat: no-repeat;
   background-size: 730px 765px;
+  image-rendering: auto;
 }
 
 .otc-guide-card-copy {
@@ -84,9 +137,9 @@
 }
 
 .otc-guide-card h2 {
-  margin: 0 0 12px;
-  color: #111;
-  font-size: 16px;
+  margin: 0 0 14px;
+  color: #173653;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.5px;
 }
@@ -94,18 +147,18 @@
 .otc-guide-card p {
   margin: 0;
   color: #222;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.75;
   letter-spacing: -0.2px;
 }
 
 .otc-guide-card strong {
-  color: #363636;
-  font-weight: 600;
+  color: #171717;
+  font-weight: 700;
 }
 
 .otc-guide-note {
-  margin: 28px 0 0;
+  margin: 34px 0 0;
   color: #333;
   font-size: 12px;
   text-align: center;
@@ -123,11 +176,14 @@
   }
 
   .otc-guide-hero {
-    padding: 54px 20px 72px;
+    padding: 0 18px 72px;
   }
 
   .otc-guide-header {
-    margin-bottom: 34px;
+    width: calc(100% + 36px);
+    margin-left: -18px;
+    margin-bottom: 38px;
+    padding: 62px 18px 58px;
   }
 
   .otc-guide-header h1 {
@@ -145,15 +201,23 @@
   }
 
   .otc-guide-card {
-    min-height: 118px;
-    padding: 20px 18px;
+    min-height: 136px;
+    padding: 24px 18px;
+  }
+
+  .otc-guide-logo-frame {
+    flex-basis: 64px;
+    width: 64px;
+    height: 64px;
+    margin-right: 16px;
   }
 
   .otc-guide-card h2 {
-    font-size: 15px;
+    padding-right: 24px;
+    font-size: 16px;
   }
 
   .otc-guide-card p {
-    font-size: 10.5px;
+    font-size: 11px;
   }
 }

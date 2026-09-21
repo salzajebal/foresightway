@@ -1,4 +1,4 @@
-import guideReference from '../../../../attached_assets/image_1789950345268.png';
+import guideReference from '../assets/otc-guide-sprite-4x.png';
 import './OtcStockGuide.css';
 
 type SecuritiesFirm = {
@@ -43,17 +43,22 @@ export function OtcStockGuide() {
           </header>
 
           <div className="otc-guide-grid">
-            {firms.map((firm) => (
+            {firms.map((firm, index) => (
               <article className="otc-guide-card" key={firm.name}>
-                <div
-                  className="otc-guide-logo"
-                  role="img"
-                  aria-label={`${firm.name} 로고`}
-                  style={{
-                    backgroundImage: `url(${guideReference})`,
-                    backgroundPosition: firm.logoPosition,
-                  }}
-                />
+                <span className="otc-guide-card-number" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <div className="otc-guide-logo-frame">
+                  <div
+                    className="otc-guide-logo"
+                    role="img"
+                    aria-label={`${firm.name} 로고`}
+                    style={{
+                      backgroundImage: `url(${guideReference})`,
+                      backgroundPosition: firm.logoPosition,
+                    }}
+                  />
+                </div>
                 <div className="otc-guide-card-copy">
                   <h2>{firm.name}</h2>
                   <p>
