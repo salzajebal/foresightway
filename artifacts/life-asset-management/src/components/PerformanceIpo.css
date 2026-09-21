@@ -465,15 +465,29 @@
     width: 100%;
   }
   
-  .perf-ipo-board { gap: 16px; }
+  .perf-ipo-board {
+    gap: 16px;
+    scroll-snap-type: x mandatory;
+  }
+
   .perf-ipo-column {
-    flex: 0 0 260px;
-    min-width: 260px;
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 100%;
+    scroll-snap-align: start;
   }
 
   .perf-ipo-card {
     min-height: 286px;
     padding: 26px 20px 24px;
+  }
+
+  .perf-ipo-stat-primary {
+    flex-wrap: wrap;
+  }
+
+  .perf-ipo-stat-primary dd {
+    white-space: nowrap;
   }
 }
 
