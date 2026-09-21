@@ -49,10 +49,10 @@
 }
 
 .philosophy-intro-copy p {
-  color: #777777;
+  color: #444444;
   font-size: 16px;
   line-height: 2;
-  font-weight: 300;
+  font-weight: 400;
   margin-top: 16px;
 }
 
@@ -140,9 +140,10 @@
 }
 
 .philosophy-table td p {
-  color: #777777;
+  color: #444444;
   font-size: 14px;
   line-height: 1.7;
+  font-weight: 400;
 }
 
 .philosophy-detail-list {
@@ -214,8 +215,8 @@
 .philosophy-detail-body p {
   font-size: 16px;
   line-height: 1.8;
-  color: #777777;
-  font-weight: 300;
+  color: #444444;
+  font-weight: 400;
 }
 
 .philosophy-callout {
